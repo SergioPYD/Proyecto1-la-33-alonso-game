@@ -1,14 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>La 33 Alonso JS Game</title>
-    <link rel="stylesheet" href="./styles/style.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" href="./styles/style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap");
+    </style>
+  </head>
+  <body>
+    <!-- INICIO -->
+    <div id="inicio" class="recuadro">
+      <h1>""LA 33" GAME OF THE YEAR EDITION</h1>
 
+      <div class="btn-position">
+        <button id="start-btn">PLAY THE GAME</button>
+        <div id="center-img">
+          <img
+            id="img-inicio"
+            src="./images/alonso inicio.png"
+            width="600"
+            alt="inicio-logo"
+          />
+        </div>
+        <button id="instr-btn">INSTRUCCIONES</button>
+      </div>
+    </div>
+
+    <!-- INSTRUCCIONES -->
+    <div id="instrucciones" class="recuadro">
+      <!-- <img src="" width="" alt="" /> -->
+      <div class="btn-position">
+        <button id="inicio-instr-btn">INICIO</button>
+      </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="game-screen" class="recuadro">
+      <div id="game-box"></div>
+    </div>
+
+    <!-- GAME OVER SCREEN -->
+    <div id="gameover-screen" class="recuadro">
+      <h1>GAME OVER</h1>
+      <!-- <img src="./images/gameover.png" width="500" alt="logo" /> -->
+      <div class="btn-position">
+        <button id="start-btn">START AGAIN</button>
+        <button id="inicio-btn">INICIO</button>
+      </div>
+    </div>
+    <script src="./js/game.js"></script>
+    <script src="./js/alonsoCar.js"></script>
     <script src="./js/main.js"></script>
-</body>
+  </body>
 </html>

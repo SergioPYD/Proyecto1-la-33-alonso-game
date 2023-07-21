@@ -1,0 +1,64 @@
+body {
+  background-color: steelblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url("../images/bg-body.jpg");
+}
+h1 {
+  font-family: "Orbitron", sans-serif;
+  color:white;
+  
+}
+
+.center-img {
+  text-align: center;
+}
+
+.recuadro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 100px;
+  width: 1000px;
+  height: 450px;
+  background-color: cadetblue;
+  
+}
+
+#game-box{
+    background-color: darkgray;
+    width: 1000px;
+    height: 450px;
+  overflow: hidden;
+  position: relative; /* this will allow elements to be positioned relative to the game-box */
+  user-select: none; /* this will prevent elements from being highlighted */
+ background-image: url("../images/bg-game.png");
+ background-position: center;
+ background-size:contain;
+}
+
+#inicio { display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 100px;
+    width: 1000px;
+    height: 450px;
+    background-image: url("../images/bg-renault.png");
+    background-repeat: repeat;
+    background-size: cover;
+
+
+}
+.btn-position {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px 0px;
+}
+
+#instrucciones, #gameover-screen, #game-screen{
+    display: none;
+}
