@@ -8,11 +8,11 @@ this.carNode.src = "images/fhd0rp4f.png";
 gameScreenNode.append(this.carNode)
 
 // ajustes de velocidad
-this.velocidadAlonso=0.2;
+this.velocidadAlonso=0.4;
 
 
 
-this.x = 20;
+this.x = 400;
 this.y = 150;
 this.w = 200;
 this.h = 70;

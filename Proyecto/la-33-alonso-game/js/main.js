@@ -37,13 +37,13 @@ window.addEventListener("keydown", (event) => {
   console.log(event.key);
 
   if (gameObj.isGameOn === true) {
-    if (event.key === "ArrowRight") {
+    if (event.key === "ArrowRight" && gameObj.alonso.x  <= 1200) { 
       gameObj.alonso.x += 50;
-    } else if (event.key === "ArrowLeft") {
+    } else if (event.key === "ArrowLeft" && gameObj.alonso.x  >= 400) {
       gameObj.alonso.x -= 50;
-    } else if (event.key === "ArrowDown") {
+    } else if (event.key === "ArrowDown" && gameObj.alonso.y  <= 400) {
       gameObj.alonso.y += 50;
-    } else if (event.key === "ArrowUp") {
+    } else if (event.key === "ArrowUp" && gameObj.alonso.y  >= 190) {
       gameObj.alonso.y -= 50;
     }
   }
