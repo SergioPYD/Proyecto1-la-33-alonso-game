@@ -21,8 +21,6 @@ h1 {
   flex-direction: column;
   justify-content: center;
   margin: 100px;
-  width: 1000px;
-  height: 450px;
   background-color: cadetblue;
 }
 

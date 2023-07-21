@@ -4,16 +4,16 @@ class Alonso {
 constructor(){
 
 this.carNode = document.createElement("img");
-this.carNode.src = "images/fhd0rp4f.png";
-gameScreenNode.append(this.carNode)
+this.carNode.src = "./images/fhd0rp4f.png";
+gameBoxNode.append(this.carNode);
 
 // ajustes de velocidad
 this.velocidadAlonso=0.4;
 
 
 
-this.x = 400;
-this.y = 150;
+this.x = 10;
+this.y = 200;
 this.w = 200;
 this.h = 70;
 
