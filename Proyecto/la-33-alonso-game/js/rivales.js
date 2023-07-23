@@ -4,7 +4,7 @@ class Rivales {
     if (cocheArriba === true) {
       this.rivalNode.src = "./images/enemy1.png";
     } else {
-      this.rivalNode.src = "./images/enemy2.png";
+      this.rivalNode.src = "./images/enemy1.png";
     };
 
     gameBoxNode.append(this.rivalNode);
@@ -19,6 +19,7 @@ class Rivales {
     this.rivalNode.style.position = "absolute";
     this.rivalNode.style.top = `${this.y}px`;
     this.rivalNode.style.left = `${this.x}px`;
+    this.rivalNode.style.zIndex = "1";
   }
  
  

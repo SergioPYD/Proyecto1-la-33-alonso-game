@@ -50,7 +50,7 @@ h1 {
 .btn-position {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content:space-around;
   padding-top: 20px 0px;
 }
 

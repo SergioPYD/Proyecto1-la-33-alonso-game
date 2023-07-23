@@ -5,7 +5,9 @@ const gameScreenNode = document.querySelector("#game-screen");
 const gameBoxNode = document.querySelector("#game-box")
 const instruccionesScreenNode = document.querySelector("#instrucciones");
 const inicioBtnInstructionsNode = document.querySelector("#inicio-instr-btn");
-
+const gameOverNode = document.querySelector("#gameover-screen")
+const startAgainNode = document.querySelector("#start-again-btn")
+const inicioBtnNode =document.querySelector("#inicio-btn")
 let gameObj = null;
 
 
@@ -32,11 +34,25 @@ function instruccionesToInicio() {
   instruccionesScreenNode.style.display = "none";
 }
 
+function gameOverToInicio () {
+  inicioScreenNode.style.display = "flex";
+  gameOverNode.style.display = "none";
+  location.reload()
+}
+
+
+
 // ADD EVENT LISTENERS
 
 playGameBtnNode.addEventListener("click", startGame);
 instruccionesBtnNode.addEventListener("click", instructions);
 inicioBtnInstructionsNode.addEventListener("click", instruccionesToInicio);
+
+inicioBtnNode.addEventListener("click", gameOverToInicio);
+
+
+
+
 window.addEventListener("keydown", (event) => {
   
 
