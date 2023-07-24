@@ -8,20 +8,27 @@ const inicioBtnInstructionsNode = document.querySelector("#inicio-instr-btn");
 const gameOverNode = document.querySelector("#gameover-screen")
 const startAgainNode = document.querySelector("#start-again-btn")
 const inicioBtnNode =document.querySelector("#inicio-btn")
+const counterNode =document.querySelector("#counter")
+
 let gameObj = null;
 
-
-
+const vidaNode =document.querySelector("#vidas")
 
 // FUNCIONES INICIALES
 
 function startGame() {
   inicioScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
+ 
+ 
 
   gameObj = new Game();
   console.log(gameObj);
   gameObj.gameLoop();
+ 
+ 
+
+
 }
 
 function instructions() {
@@ -47,11 +54,7 @@ function gameOverToInicio () {
 playGameBtnNode.addEventListener("click", startGame);
 instruccionesBtnNode.addEventListener("click", instructions);
 inicioBtnInstructionsNode.addEventListener("click", instruccionesToInicio);
-
 inicioBtnNode.addEventListener("click", gameOverToInicio);
-
-
-
 
 window.addEventListener("keydown", (event) => {
   
@@ -63,7 +66,7 @@ window.addEventListener("keydown", (event) => {
       gameObj.alonso.x -= 50;
     } else if (event.key === "ArrowDown" && gameObj.alonso.y  <= 300) {
       gameObj.alonso.y += 50;
-    } else if (event.key === "ArrowUp" && gameObj.alonso.y  >= 60) {
+    } else if (event.key === "ArrowUp" && gameObj.alonso.y  >= 30) {
       gameObj.alonso.y -= 50;
     }
   }

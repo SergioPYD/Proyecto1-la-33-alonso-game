@@ -11,6 +11,12 @@ h1 {
   font-family: "Orbitron", sans-serif;
   color: white;
 }
+#game-screen h2 {
+  font-family: "Orbitron", sans-serif;
+  color: white;
+  text-align: end;
+  padding-right: 5%;
+}
 
 .center-img {
   text-align: center;
@@ -35,7 +41,12 @@ h1 {
   background-position: center;
   background-size: contain;
 }
+#top-view  {
+  display: flex;
+  justify-content: space-around;
 
+  
+}
 #inicio {
   display: flex;
   flex-direction: column;

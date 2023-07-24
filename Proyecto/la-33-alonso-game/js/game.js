@@ -9,6 +9,21 @@ class Game {
     this.raceLineArr = [];
     this.frames = 0;
     this.isGameOn = true;
+    this.counter = 0;
+    this.vida = 3;
+
+    this.vida1 = document.createElement("img");
+    this.vida1.src = "./images/vida1.png";
+    this.vida1.width = "35";
+    this.vida2 = document.createElement("img");
+    this.vida2.src = "./images/vida2.png";
+    this.vida2.width = "35";
+    this.vida3 = document.createElement("img");
+    this.vida3.src = "./images/vida3.png";
+    this.vida3.width = "35";
+    vidaNode.append(this.vida1);
+    vidaNode.append(this.vida2);
+    vidaNode.append(this.vida3);
   }
 
   gameOverCollition = () => {
@@ -19,7 +34,14 @@ class Game {
         this.alonso.y < cadaRival.y + cadaRival.h &&
         this.alonso.y + this.alonso.h > cadaRival.y
       ) {
-        this.gameOver();
+        if (this.vida <= 0) {
+          this.gameOver();
+        } else {
+          vidaNode.removeChild(vidaNode.lastChild);
+          this.vida--;
+          this.enemyArr[0].rivalNode.remove();
+          this.enemyArr.shift()
+        }
       }
     });
   };
@@ -29,7 +51,6 @@ class Game {
     gameScreenNode.style.display = "none";
     gameOverNode.style.display = "flex";
   };
-
   rivalesAparecen = () => {
     if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
       let randomNumberY = Math.floor(Math.random() * 400);
@@ -47,7 +68,6 @@ class Game {
       this.enemyArr.shift();
     }
   };
-
   redLineAparecen = () => {
     if (this.redLineArr.length === 0 || this.frames % 60 === 0) {
       let redLineArriba = new RedLine(0, true);
@@ -62,7 +82,6 @@ class Game {
       this.redLineArr.shift();
     }
   };
-
   whiteLineAparecen = () => {
     if (this.whiteLineArr.length === 0 || this.frames % 80 === 0) {
       let whiteLine = new WhiteLine();
@@ -82,9 +101,12 @@ class Game {
     }
   };
   raceLineDesaparecen = () => {
-    if (this.raceLineArr[0].x < -2000) {
+    if (this.raceLineArr[0].x < -1500) {
       this.raceLineArr[0].raceLineNode.remove();
       this.raceLineArr.shift();
+      // CONTADOR DE CARRERAS (BONUS:AJUSTAR UN POCO MÁS)
+      this.counter++;
+      counterNode.innerText = this.counter;
     }
   };
 
@@ -95,6 +117,7 @@ class Game {
 
   gameLoop = () => {
     this.frames++;
+
     this.alonso.movimientoContinuo();
     this.rivalesAparecen();
     this.enemyArr.forEach((rival) => {
@@ -118,9 +141,8 @@ class Game {
     this.raceLineDesaparecen();
     this.gameOverCollition();
 
-    if(this.isGameOn === true){
+    if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
     }
-   
   };
 }
