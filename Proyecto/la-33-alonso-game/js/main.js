@@ -9,7 +9,7 @@ const gameOverNode = document.querySelector("#gameover-screen")
 const startAgainNode = document.querySelector("#start-again-btn")
 const inicioBtnNode =document.querySelector("#inicio-btn")
 const counterNode =document.querySelector("#counter")
-
+const musicInicio =document.querySelector("#music")
 let gameObj = null;
 
 const vidaNode =document.querySelector("#vidas")
@@ -19,7 +19,7 @@ const vidaNode =document.querySelector("#vidas")
 function startGame() {
   inicioScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
- 
+  musicInicio.remove()
  
 
   gameObj = new Game();

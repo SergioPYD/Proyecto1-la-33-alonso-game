@@ -23,7 +23,7 @@ this.carNode.style.height = `${this.h}px`
 this.carNode.style.position = "absolute"
 this.carNode.style.top = `${this.y}px`
 this.carNode.style.left = `${this.x}px`
-this.carNode.style.zIndex = "1";
+this.carNode.style.zIndex = "2";
 
 }
 

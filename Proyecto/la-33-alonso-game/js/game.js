@@ -38,9 +38,10 @@ class Game {
           this.gameOver();
         } else {
           vidaNode.removeChild(vidaNode.lastChild);
-          this.vida--;
+          
           this.enemyArr[0].rivalNode.remove();
-          this.enemyArr.shift()
+          this.enemyArr.shift(0,this.enemyArr.length);
+          this.vida--;
         }
       }
     });
@@ -54,11 +55,16 @@ class Game {
   rivalesAparecen = () => {
     if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
       let randomNumberY = Math.floor(Math.random() * 400);
-      let rivalArriba = new Rivales(randomNumberY, true);
+      let rivalArriba = new Rivales(randomNumberY, 1);
       this.enemyArr.push(rivalArriba);
     } else if (this.frames % 500 === 0) {
       let randomNumberY = Math.floor(Math.random() * 400);
-      let rivalAbajo = new Rivales(randomNumberY, false);
+      let rivalAbajo = new Rivales(randomNumberY, 2);
+      this.enemyArr.push(rivalAbajo);
+    }
+    else if (this.frames % 800 === 0) {
+      let randomNumberY = Math.floor(Math.random() * 400);
+      let rivalAbajo = new Rivales(randomNumberY, 3);
       this.enemyArr.push(rivalAbajo);
     }
   };

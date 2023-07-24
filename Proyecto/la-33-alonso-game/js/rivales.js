@@ -1,11 +1,13 @@
 class Rivales {
   constructor(posY, cocheArriba) {
     this.rivalNode = document.createElement("img");
-    if (cocheArriba === true) {
+    if (cocheArriba === 1) {
       this.rivalNode.src = "./images/enemy1.png";
-    } else {
-      this.rivalNode.src = "./images/enemy1.png";
-    };
+    } else if (cocheArriba === 2){
+      this.rivalNode.src = "./images/enemy2.png";
+    }else if (cocheArriba === 3){
+      this.rivalNode.src = "./images/enemy3.png";
+    }
 
     gameBoxNode.append(this.rivalNode);
 
@@ -19,7 +21,7 @@ class Rivales {
     this.rivalNode.style.position = "absolute";
     this.rivalNode.style.top = `${this.y}px`;
     this.rivalNode.style.left = `${this.x}px`;
-    this.rivalNode.style.zIndex = "1";
+    this.rivalNode.style.zIndex = "2";
   }
  
  

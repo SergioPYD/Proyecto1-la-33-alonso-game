@@ -22,6 +22,10 @@ h1 {
   text-align: center;
 }
 
+#music {
+  display: none;
+}
+
 .recuadro {
   display: flex;
   flex-direction: column;

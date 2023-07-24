@@ -16,6 +16,7 @@ class RaceLine {
       this.raceLineNode.style.position = "absolute";
       this.raceLineNode.style.top = `${this.y}px`;
       this.raceLineNode.style.left = `${this.x}px`;
+      this.raceLineNode.style.zIndex = "1";
     }
   
     automaticMovement = () => {
