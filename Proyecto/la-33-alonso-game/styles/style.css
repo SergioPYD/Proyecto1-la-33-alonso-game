@@ -22,7 +22,10 @@ h1 {
   text-align: center;
 }
 
-#music {
+#music1 {
+  display: none;
+}
+#music2 {
   display: none;
 }
 
@@ -36,7 +39,7 @@ h1 {
 
 #game-box {
   background-color: darkgray;
-  width: 1000px;
+  width: 1200px;
   height: 450px;
   overflow: hidden;
   position: relative; 

@@ -9,9 +9,11 @@ const gameOverNode = document.querySelector("#gameover-screen")
 const startAgainNode = document.querySelector("#start-again-btn")
 const inicioBtnNode =document.querySelector("#inicio-btn")
 const counterNode =document.querySelector("#counter")
-const musicInicio =document.querySelector("#music")
+const musicInicio =document.querySelector("#music1")
+const musicCarrera =document.querySelector("#music2")
 let gameObj = null;
 
+musicInicio.innerHTML = `<source src="./sound/intro-music.mp3" type="audio/mpeg">`
 const vidaNode =document.querySelector("#vidas")
 
 // FUNCIONES INICIALES
@@ -20,7 +22,7 @@ function startGame() {
   inicioScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
   musicInicio.remove()
- 
+ musicCarrera.innerHTML = `<source src="./sound/audio-carrera.mp3" type="audio/mpeg">`
 
   gameObj = new Game();
   console.log(gameObj);
