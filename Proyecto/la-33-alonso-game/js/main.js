@@ -12,8 +12,10 @@ const counterNode =document.querySelector("#counter")
 const musicInicio =document.querySelector("#music1")
 const musicCarrera =document.querySelector("#music2")
 const musicWin = document.querySelector("#music3")
+const musicLose = document.querySelector("#music4")
 const winScreenNode =document.querySelector("#win")
 const winToInicioBtnNode = document.querySelector("#win-to-inicio")
+
 let gameObj = null;
 
 musicInicio.innerHTML = `<source src="./sound/intro-music.mp3" type="audio/mpeg">`

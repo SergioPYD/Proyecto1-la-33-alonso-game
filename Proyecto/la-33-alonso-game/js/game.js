@@ -1,7 +1,8 @@
 class Game {
   constructor() {
     this.alonso = new Alonso();
-
+    
+    
     this.enemyArr = [];
     this.powerUppArr = [];
     this.redLineArr = [];
@@ -9,8 +10,18 @@ class Game {
     this.raceLineArr = [];
     this.frames = 0;
     this.isGameOn = true;
-    this.counter = 0;
+    this.counter = 31;
     this.vida = 3;
+
+
+    // if (this.counter < 14) {
+    //   this.alonso = new Alonso(1);
+    // } else if (this.counter >= 14 && this.counter < 24) {
+    //   this.alonso = new Alonso(2);
+    // } else if (this.counter >= 24) {
+    //   this.alonso = new Alonso(2);
+    // }
+
 
     this.vida1 = document.createElement("img");
     this.vida1.src = "./images/vida1.png";
@@ -48,6 +59,8 @@ class Game {
   };
 
   win = () => {
+
+    // HAY QUE AÑADIR QUE SE ELIMINEN LOS OBSTACULOS PARA QUE NO SALGA EL GAME-OVER
     if (this.counter === 33) {
       gameScreenNode.style.display = "none";
       winScreenNode.style.display = "flex";
@@ -60,6 +73,8 @@ class Game {
     this.isGameOn = false;
     gameScreenNode.style.display = "none";
     gameOverNode.style.display = "flex";
+    musicCarrera.remove();
+    musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
   };
   rivalesAparecen = () => {
     const speedStageOne = 4;
@@ -114,6 +129,7 @@ class Game {
       }
     }
   };
+
   rivalesDesaparecen = () => {
     if (this.enemyArr[0].x < -250) {
       this.enemyArr[0].rivalNode.remove();
@@ -169,6 +185,7 @@ class Game {
 
   gameLoop = () => {
     this.frames++;
+    
 
     this.alonso.movimientoContinuo();
     this.rivalesAparecen();
