@@ -47,6 +47,15 @@ class Game {
     });
   };
 
+  win = () => {
+    if (this.counter === 33) {
+      gameScreenNode.style.display = "none";
+      winScreenNode.style.display = "flex";
+      musicCarrera.remove();
+      musicWin.innerHTML = `<source src="./sound/win-sound.mp3" type="audio/mpeg">`;
+    }
+  };
+
   gameOver = () => {
     this.isGameOn = false;
     gameScreenNode.style.display = "none";
@@ -72,7 +81,7 @@ class Game {
         this.enemyArr.push(rivalAbajo);
       }
     }
-     //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN SEGUNDO STAGE
+    //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN SEGUNDO STAGE
     else if (this.counter >= 14 && this.counter < 24) {
       if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
@@ -87,7 +96,7 @@ class Game {
         let rivalAbajo = new Rivales(randomNumberY, 3, speedStageTwo);
         this.enemyArr.push(rivalAbajo);
       }
-    } 
+    }
     //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN TERCER STAGE
     else if (this.counter >= 24) {
       if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
@@ -183,6 +192,7 @@ class Game {
     });
     this.raceLineDesaparecen();
     this.gameOverCollition();
+    this.win();
 
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);

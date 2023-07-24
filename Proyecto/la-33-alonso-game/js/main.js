@@ -11,6 +11,9 @@ const inicioBtnNode =document.querySelector("#inicio-btn")
 const counterNode =document.querySelector("#counter")
 const musicInicio =document.querySelector("#music1")
 const musicCarrera =document.querySelector("#music2")
+const musicWin = document.querySelector("#music3")
+const winScreenNode =document.querySelector("#win")
+const winToInicioBtnNode = document.querySelector("#win-to-inicio")
 let gameObj = null;
 
 musicInicio.innerHTML = `<source src="./sound/intro-music.mp3" type="audio/mpeg">`
@@ -21,16 +24,13 @@ const vidaNode =document.querySelector("#vidas")
 function startGame() {
   inicioScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
-  musicInicio.remove()
+  musicInicio.remove();
  musicCarrera.innerHTML = `<source src="./sound/audio-carrera.mp3" type="audio/mpeg">`
 
   gameObj = new Game();
   console.log(gameObj);
   gameObj.gameLoop();
  
- 
-
-
 }
 
 function instructions() {
@@ -49,6 +49,13 @@ function gameOverToInicio () {
   location.reload()
 }
 
+function winToInicio () {
+  winScreenNode.style.display = "none"
+  inicioScreenNode.style.display = "flex";
+  
+    location.reload()
+}
+
 
 
 // ADD EVENT LISTENERS
@@ -57,6 +64,7 @@ playGameBtnNode.addEventListener("click", startGame);
 instruccionesBtnNode.addEventListener("click", instructions);
 inicioBtnInstructionsNode.addEventListener("click", instruccionesToInicio);
 inicioBtnNode.addEventListener("click", gameOverToInicio);
+winToInicioBtnNode.addEventListener("click", winToInicio)
 
 window.addEventListener("keydown", (event) => {
   

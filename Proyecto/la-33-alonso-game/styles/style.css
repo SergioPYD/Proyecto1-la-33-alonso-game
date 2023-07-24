@@ -11,6 +11,10 @@ h1 {
   font-family: "Orbitron", sans-serif;
   color: white;
 }
+p {
+  font-family: "Orbitron", sans-serif;
+  }
+
 #game-screen h2 {
   font-family: "Orbitron", sans-serif;
   color: white;
@@ -22,12 +26,10 @@ h1 {
   text-align: center;
 }
 
-#music1 {
+#music1,#music2,#music3 {
   display: none;
 }
-#music2 {
-  display: none;
-}
+
 
 .recuadro {
   display: flex;
@@ -74,6 +76,7 @@ h1 {
 
 #instrucciones,
 #gameover-screen,
-#game-screen {
+#game-screen,#win
+ {
   display: none;
 }

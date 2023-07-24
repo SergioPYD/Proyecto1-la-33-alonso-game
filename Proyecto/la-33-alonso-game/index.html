@@ -11,11 +11,9 @@
   </head>
   <body>
     <!-- INICIO -->
-    
+
     <div id="inicio" class="recuadro">
-      <audio id="music1" controls autoplay> 
-        
-      </audio>
+      <audio id="music1" controls muted></audio>
       <h1>"LA 33" GAME OF THE YEAR EDITION</h1>
 
       <div class="btn-position">
@@ -42,13 +40,11 @@
 
     <!-- GAME SCREEN -->
     <div id="game-screen" class="recuadro">
-      <audio id="music2" controls autoplay> 
-       
-      </audio>
-      <div id="top-view"><h2>VIDAS</h2>
+      <audio id="music2" controls muted></audio>
+      <div id="top-view">
+        <h2>VIDAS</h2>
         <div id="vidas"></div>
-        <h2 >CONTADOR DE CARRERAS <span id="counter"></span></h2>
-      
+        <h2>CONTADOR DE CARRERAS <span id="counter"></span></h2>
       </div>
       <div id="game-box"></div>
     </div>
@@ -62,6 +58,17 @@
         <button id="inicio-btn">INICIO</button>
       </div>
     </div>
+  <!-- WIN GAME
+     SCREEN -->
+    <div id="win" class="recuadro">
+      <audio id="music3" controls muted></audio>
+      <h1>¡¡¡LO LOGRASTE!!!</h1>
+      <div><img src="./images/win.gif" alt="ganaste" width="600" /></div>
+      <div class="btn-position">
+        <button id="win-to-inicio">VUELVE A INTENTARLO</button>
+      </div>
+    </div>
+
     <script src="./js/race-line.js"></script>
     <script src="./js/white-line.js"></script>
     <script src="./js/red-line.js"></script>
