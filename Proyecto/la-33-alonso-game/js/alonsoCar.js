@@ -1,15 +1,8 @@
 class Alonso {
-  constructor(stage) {
+  constructor() {
     this.carNode = document.createElement("img");
     this.carNode.src = "./images/alonso-1.png"
-    // if (stage === 1) {
-    //   this.carNode.src = "./images/alonso-1.png";
-    // } else if (stage === 2) {
-    //   this.carNode.src = "./images/alonso-2.png";
-    // } else if (stage === 3) {
-    // this.carNode.src = "./images/alonso-2.png";
-
-    // }
+    
 
     gameBoxNode.append(this.carNode);
 

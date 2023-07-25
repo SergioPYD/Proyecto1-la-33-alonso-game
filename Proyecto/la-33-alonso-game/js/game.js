@@ -1,8 +1,7 @@
 class Game {
   constructor() {
     this.alonso = new Alonso();
-    
-    
+
     this.enemyArr = [];
     this.powerUppArr = [];
     this.redLineArr = [];
@@ -10,19 +9,11 @@ class Game {
     this.raceLineArr = [];
     this.frames = 0;
     this.isGameOn = true;
-    this.counter = 31;
+    this.counter = -1;
     this.vida = 3;
+    this.itemArr = [];
 
-
-    // if (this.counter < 14) {
-    //   this.alonso = new Alonso(1);
-    // } else if (this.counter >= 14 && this.counter < 24) {
-    //   this.alonso = new Alonso(2);
-    // } else if (this.counter >= 24) {
-    //   this.alonso = new Alonso(2);
-    // }
-
-
+    // Añade contador de vidas
     this.vida1 = document.createElement("img");
     this.vida1.src = "./images/vida1.png";
     this.vida1.width = "35";
@@ -32,6 +23,7 @@ class Game {
     this.vida3 = document.createElement("img");
     this.vida3.src = "./images/vida3.png";
     this.vida3.width = "35";
+
     vidaNode.append(this.vida1);
     vidaNode.append(this.vida2);
     vidaNode.append(this.vida3);
@@ -58,12 +50,21 @@ class Game {
     });
   };
 
-  win = () => {
+  alonsoUpdate = () => {
+    if (this.counter >= 14 && this.counter < 24) {
+      this.alonso.carNode.src = "./images/alonso-2.png";
+    } else if (this.counter >= 24) {
+      this.alonso.carNode.src = "./images/alonso-3.png";
+    }
+  };
 
+  win = () => {
     // HAY QUE AÑADIR QUE SE ELIMINEN LOS OBSTACULOS PARA QUE NO SALGA EL GAME-OVER
     if (this.counter === 33) {
       gameScreenNode.style.display = "none";
       winScreenNode.style.display = "flex";
+      gameScreenNode.innerHTML = "";
+      gameOverNode.innerHTML = "";
       musicCarrera.remove();
       musicWin.innerHTML = `<source src="./sound/win-sound.mp3" type="audio/mpeg">`;
     }
@@ -73,9 +74,39 @@ class Game {
     this.isGameOn = false;
     gameScreenNode.style.display = "none";
     gameOverNode.style.display = "flex";
+    gameScreenNode.innerHTML = "";
     musicCarrera.remove();
     musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
   };
+
+  randomItemAparece = () => {
+    let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
+    if (this.frames % randomNumberFrame === 0) {
+      let randomX = Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
+      let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 50));
+      let newItem = new Items(randomY, randomX);
+      this.itemArr.push(newItem);
+    }
+  };
+  lvlUp = () => {
+    this.itemArr.forEach((cadaItem) => {
+      if (
+        this.alonso.x < cadaItem.x + cadaItem.w &&
+        this.alonso.x + this.alonso.w > cadaItem.x &&
+        this.alonso.y < cadaItem.y + cadaItem.h &&
+        this.alonso.y + this.alonso.h > cadaItem.y
+      ) {
+        this.vida4 = document.createElement("img");
+        this.vida4.src = "./images/vida4.png";
+        this.vida4.width = "35";
+        vidaNode.append(this.vida4);
+        this.vida++;
+        this.itemArr[0].itemNode.remove();
+        this.itemArr.shift();
+      }
+    });
+  };
+
   rivalesAparecen = () => {
     const speedStageOne = 4;
     const speedStageTwo = 8;
@@ -88,11 +119,11 @@ class Game {
         this.enemyArr.push(rivalArriba);
       } else if (this.frames % 500 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 2, speedStageOne);
+        let rivalAbajo = new Rivales(randomNumberY, 1, speedStageOne);
         this.enemyArr.push(rivalAbajo);
       } else if (this.frames % 800 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 3, speedStageOne);
+        let rivalAbajo = new Rivales(randomNumberY, 6, speedStageOne);
         this.enemyArr.push(rivalAbajo);
       }
     }
@@ -100,15 +131,15 @@ class Game {
     else if (this.counter >= 14 && this.counter < 24) {
       if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalArriba = new Rivales(randomNumberY, 1, speedStageTwo);
+        let rivalArriba = new Rivales(randomNumberY, 3, speedStageTwo);
         this.enemyArr.push(rivalArriba);
       } else if (this.frames % 500 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 2, speedStageTwo);
+        let rivalAbajo = new Rivales(randomNumberY, 3, speedStageTwo);
         this.enemyArr.push(rivalAbajo);
       } else if (this.frames % 800 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 3, speedStageTwo);
+        let rivalAbajo = new Rivales(randomNumberY, 2, speedStageTwo);
         this.enemyArr.push(rivalAbajo);
       }
     }
@@ -116,15 +147,15 @@ class Game {
     else if (this.counter >= 24) {
       if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalArriba = new Rivales(randomNumberY, 1, speedStageThree);
+        let rivalArriba = new Rivales(randomNumberY, 4, speedStageThree);
         this.enemyArr.push(rivalArriba);
+      } else if (this.frames % 700 === 0) {
+        let randomNumberY = Math.floor(Math.random() * 400);
+        let rivalAbajo = new Rivales(randomNumberY, 4, speedStageThree);
+        this.enemyArr.push(rivalAbajo);
       } else if (this.frames % 500 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 2, speedStageThree);
-        this.enemyArr.push(rivalAbajo);
-      } else if (this.frames % 800 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 3, speedStageThree);
+        let rivalAbajo = new Rivales(randomNumberY, 5, speedStageThree);
         this.enemyArr.push(rivalAbajo);
       }
     }
@@ -169,7 +200,7 @@ class Game {
     }
   };
   raceLineDesaparecen = () => {
-    if (this.raceLineArr[0].x < -1000) {
+    if (this.raceLineArr[0].x < -60) {
       this.raceLineArr[0].raceLineNode.remove();
       this.raceLineArr.shift();
       // CONTADOR DE CARRERAS (BONUS:AJUSTAR UN POCO MÁS)
@@ -185,9 +216,10 @@ class Game {
 
   gameLoop = () => {
     this.frames++;
-    
-
     this.alonso.movimientoContinuo();
+    this.randomItemAparece();
+    this.lvlUp();
+    this.alonsoUpdate();
     this.rivalesAparecen();
     this.enemyArr.forEach((rival) => {
       rival.automaticMovement();

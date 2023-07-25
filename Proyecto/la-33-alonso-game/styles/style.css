@@ -10,6 +10,7 @@ body {
 h1 {
   font-family: "Orbitron", sans-serif;
   color: white;
+  font-size: 2.5rem;
 }
 p {
   font-family: "Orbitron", sans-serif;
@@ -41,7 +42,7 @@ p {
 
 #game-box {
   background-color: darkgray;
-  width: 1200px;
+  width: 1150px;
   height: 450px;
   overflow: hidden;
   position: relative; 
@@ -61,7 +62,7 @@ p {
   flex-direction: column;
   justify-content: center;
   margin: 100px;
-  width: 1000px;
+  width: 1200px;
   height: 450px;
   background-image: url("../images/bg-renault.png");
   background-repeat: repeat;

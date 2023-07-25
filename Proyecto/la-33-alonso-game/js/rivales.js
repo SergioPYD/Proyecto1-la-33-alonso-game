@@ -7,7 +7,14 @@ class Rivales {
       this.rivalNode.src = "./images/enemy2.png";
     } else if (cocheArriba === 3) {
       this.rivalNode.src = "./images/enemy3.png";
+    } else if (cocheArriba === 4) {
+      this.rivalNode.src = "./images/enemy4.png";
+    } else if (cocheArriba === 5) {
+      this.rivalNode.src = "./images/enemy5.png";
+    }else if (cocheArriba === 6) {
+      this.rivalNode.src = "./images/enemy6.png";
     }
+
 
     gameBoxNode.append(this.rivalNode);
 
