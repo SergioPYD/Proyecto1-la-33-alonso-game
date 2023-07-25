@@ -30,7 +30,24 @@ p {
 #music1,#music2,#music3,#music4 {
   display: none;
 }
+#top-view {
+  height: 90px;
+  display: flex;
+  align-items:center;
+}
+#vidas-screen {
+  padding-left: 10px;
+  padding-right: 50px;
+  display: flex;
+  justify-content:space-around;
+  flex-direction:row
+}
+#vidas {display: flex;
+  justify-content: center;
+  padding-left: 30px;
 
+
+}
 
 .recuadro {
   display: flex;

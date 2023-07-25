@@ -16,13 +16,16 @@ class Game {
     // Añade contador de vidas
     this.vida1 = document.createElement("img");
     this.vida1.src = "./images/vida1.png";
-    this.vida1.width = "35";
+    this.vida1.width = "40";
+    this.vida1.height = "80";
     this.vida2 = document.createElement("img");
     this.vida2.src = "./images/vida2.png";
-    this.vida2.width = "35";
+    this.vida2.width = "40";
+    this.vida2.height = "80";
     this.vida3 = document.createElement("img");
     this.vida3.src = "./images/vida3.png";
-    this.vida3.width = "35";
+    this.vida3.width = "40";
+    this.vida3.height = "80";
 
     vidaNode.append(this.vida1);
     vidaNode.append(this.vida2);
