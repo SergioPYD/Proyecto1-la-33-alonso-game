@@ -31,6 +31,7 @@ function startGame() {
 
   gameObj = new Game();
   console.log(gameObj);
+  gameObj.vidasLayout();
   gameObj.gameLoop();
  
 }

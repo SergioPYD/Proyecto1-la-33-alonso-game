@@ -7,13 +7,20 @@ class Game {
     this.redLineArr = [];
     this.whiteLineArr = [];
     this.raceLineArr = [];
-    this.frames = 0;
-    this.isGameOn = true;
-    this.counter = -1;
-    this.vida = 3;
     this.itemArr = [];
 
+    this.isGameOn = true;
+    this.lvlUpShow = false;
+
+    this.lvlUpTime = 3000;
+    this.frames = 0;
+    this.counter = -1;
+    this.vida = 3;
+
     // Añade contador de vidas
+  }
+
+  vidasLayout = () => {
     this.vida1 = document.createElement("img");
     this.vida1.src = "./images/vida1.png";
     this.vida1.width = "40";
@@ -30,7 +37,7 @@ class Game {
     vidaNode.append(this.vida1);
     vidaNode.append(this.vida2);
     vidaNode.append(this.vida3);
-  }
+  };
 
   gameOverCollition = () => {
     this.enemyArr.forEach((cadaRival) => {
@@ -85,12 +92,26 @@ class Game {
   randomItemAparece = () => {
     let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
     if (this.frames % randomNumberFrame === 0) {
-      let randomX = Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
+      let randomX =
+        300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
       let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 50));
       let newItem = new Items(randomY, randomX);
       this.itemArr.push(newItem);
+      this.lvlUpShow = true;
+      setTimeout(() => {
+        this.lvlUpShow = false;
+      }, this.lvlUpTime);
     }
   };
+
+  randomItemDesaparece = () => {
+    if (this.lvlUpShow === false && this.itemArr.length > 0) {
+      
+      this.itemArr[0].itemNode.remove();
+      this.itemArr.shift();
+    }
+  };
+
   lvlUp = () => {
     this.itemArr.forEach((cadaItem) => {
       if (
@@ -221,6 +242,7 @@ class Game {
     this.frames++;
     this.alonso.movimientoContinuo();
     this.randomItemAparece();
+    this.randomItemDesaparece();
     this.lvlUp();
     this.alonsoUpdate();
     this.rivalesAparecen();
