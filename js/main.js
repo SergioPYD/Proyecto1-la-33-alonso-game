@@ -33,6 +33,7 @@ function startGame() {
   console.log(gameObj);
   gameObj.vidasLayout();
   gameObj.gameLoop();
+  gameObj.movimientoAlonsoTeclado();
  
 }
 
@@ -69,18 +70,18 @@ inicioBtnInstructionsNode.addEventListener("click", instruccionesToInicio);
 inicioBtnNode.addEventListener("click", gameOverToInicio);
 winToInicioBtnNode.addEventListener("click", winToInicio)
 
-window.addEventListener("keydown", (event) => {
+// window.addEventListener("keydown", (event) => {
   
 
-  if (gameObj.isGameOn === true) {
-    if (event.key === "ArrowRight" && gameObj.alonso.x  <= 800) { 
-      gameObj.alonso.x += 50;
-    } else if (event.key === "ArrowLeft" && gameObj.alonso.x  >= 0) {
-      gameObj.alonso.x -= 50;
-    } else if (event.key === "ArrowDown" && gameObj.alonso.y  <= 300) {
-      gameObj.alonso.y += 50;
-    } else if (event.key === "ArrowUp" && gameObj.alonso.y  >= 30) {
-      gameObj.alonso.y -= 50;
-    }
-  }
-});
+//   if (gameObj.isGameOn === true) {
+//     if (event.key === "ArrowRight" && gameObj.alonso.x  <= 800) { 
+//       gameObj.alonso.x += 50;
+//     } else if (event.key === "ArrowLeft" && gameObj.alonso.x  >= 0) {
+//       gameObj.alonso.x -= 50;
+//     } else if (event.key === "ArrowDown" && gameObj.alonso.y  <= 300) {
+//       gameObj.alonso.y += 50;
+//     } else if (event.key === "ArrowUp" && gameObj.alonso.y  >= 30) {
+//       gameObj.alonso.y -= 50;
+//     }
+//   }
+// });

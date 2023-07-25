@@ -1,5 +1,5 @@
 class Items {
-  constructor(posY, posX,) {
+  constructor(posY, posX) {
     this.itemNode = document.createElement("img");
 
     this.itemNode.src = "./images/1up.gif";

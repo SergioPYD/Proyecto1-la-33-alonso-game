@@ -7,19 +7,49 @@ class Game {
     this.redLineArr = [];
     this.whiteLineArr = [];
     this.raceLineArr = [];
-    this.itemArr = [];
+    this.lvlUpArr = [];
 
     this.isGameOn = true;
     this.lvlUpShow = false;
+    this.moreSpeed = false;
 
     this.lvlUpTime = 3000;
     this.frames = 0;
     this.counter = -1;
     this.vida = 3;
 
-    // Añade contador de vidas
+   
   }
 
+// MOVIMIENTO DEL PERSONAJE PRINCIPAL
+
+  movimientoAlonsoTeclado = () =>{window.addEventListener("keydown", (event) => {
+  
+
+    if (this.isGameOn === true && this.moreSpeed ===false) {
+      if (event.key === "ArrowRight" && this.alonso.x  <= 800) { 
+        this.alonso.x += 50;
+      } else if (event.key === "ArrowLeft" && this.alonso.x  >= 0) {
+        this.alonso.x -= 50;
+      } else if (event.key === "ArrowDown" && this.alonso.y  <= 300) {
+        this.alonso.y += 50;
+      } else if (event.key === "ArrowUp" && this.alonso.y  >= 30) {
+        this.alonso.y -= 50;
+      }
+    } else if (this.isGameOn === true && this.moreSpeed === true){
+      if (event.key === "ArrowRight" && this.alonso.x  <= 800) { 
+        this.alonso.x += 100;
+      } else if (event.key === "ArrowLeft" && this.alonso.x  >= 0) {
+        this.alonso.x -= 100;
+      } else if (event.key === "ArrowDown" && this.alonso.y  <= 300) {
+        this.alonso.y += 100;
+      } else if (event.key === "ArrowUp" && this.alonso.y  >= 30) {
+        this.alonso.y -= 100;
+      }
+    }
+  });}
+
+  // SE AÑADEN VIDAS AL INICIAR EL JUEGO
   vidasLayout = () => {
     this.vida1 = document.createElement("img");
     this.vida1.src = "./images/vida1.png";
@@ -39,8 +69,10 @@ class Game {
     vidaNode.append(this.vida3);
   };
 
+
+  // COLISION QUE RESTA VIDAS (VIDAS = 0 GAME OVER)
   gameOverCollition = () => {
-    this.enemyArr.forEach((cadaRival) => {
+    this.enemyArr.forEach((cadaRival, index) => {
       if (
         this.alonso.x < cadaRival.x + cadaRival.w &&
         this.alonso.x + this.alonso.w > cadaRival.x &&
@@ -52,14 +84,15 @@ class Game {
         } else {
           vidaNode.removeChild(vidaNode.lastChild);
 
-          this.enemyArr[0].rivalNode.remove();
-          this.enemyArr.shift(0, this.enemyArr.length);
+          cadaRival.rivalNode.remove();
+          this.enemyArr.splice(index,1);
           this.vida--;
         }
       }
     });
   };
 
+  // EL COCHE SE ACTUALIZA EN FUNCION A LAS CARRERAS GANADAS
   alonsoUpdate = () => {
     if (this.counter >= 14 && this.counter < 24) {
       this.alonso.carNode.src = "./images/alonso-2.png";
@@ -68,6 +101,7 @@ class Game {
     }
   };
 
+  // CONDICION PARA GANAR EL JUEGO Y PERDER EL JUEGO
   win = () => {
     // HAY QUE AÑADIR QUE SE ELIMINEN LOS OBSTACULOS PARA QUE NO SALGA EL GAME-OVER
     if (this.counter === 33) {
@@ -79,7 +113,6 @@ class Game {
       musicWin.innerHTML = `<source src="./sound/win-sound.mp3" type="audio/mpeg">`;
     }
   };
-
   gameOver = () => {
     this.isGameOn = false;
     gameScreenNode.style.display = "none";
@@ -89,14 +122,16 @@ class Game {
     musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
   };
 
-  randomItemAparece = () => {
+// ITEMS ALEATORIOS CON DISTINTAS FUNCIONES:
+
+  randomItemLvlUp = () => {
     let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
     if (this.frames % randomNumberFrame === 0) {
       let randomX =
         300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
       let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 50));
       let newItem = new Items(randomY, randomX);
-      this.itemArr.push(newItem);
+      this.lvlUpArr.push(newItem);
       this.lvlUpShow = true;
       setTimeout(() => {
         this.lvlUpShow = false;
@@ -104,16 +139,16 @@ class Game {
     }
   };
 
-  randomItemDesaparece = () => {
-    if (this.lvlUpShow === false && this.itemArr.length > 0) {
+  randomItemLvlUpDesaparece = () => {
+    if (this.lvlUpShow === false && this.lvlUpArr.length > 0) {
       
-      this.itemArr[0].itemNode.remove();
-      this.itemArr.shift();
+      this.lvlUpArr[0].itemNode.remove();
+      this.lvlUpArr.shift();
     }
   };
 
-  lvlUp = () => {
-    this.itemArr.forEach((cadaItem) => {
+  lvlUpCollition = () => {
+    this.lvlUpArr.forEach((cadaItem,index) => {
       if (
         this.alonso.x < cadaItem.x + cadaItem.w &&
         this.alonso.x + this.alonso.w > cadaItem.x &&
@@ -125,11 +160,13 @@ class Game {
         this.vida4.width = "35";
         vidaNode.append(this.vida4);
         this.vida++;
-        this.itemArr[0].itemNode.remove();
-        this.itemArr.shift();
+        cadaItem.itemNode.remove();
+        this.lvlUpArr.splice(index,1);
       }
     });
   };
+
+// FUNCIONES RELACIONADAS CON LOS ENEMIGOS
 
   rivalesAparecen = () => {
     const speedStageOne = 4;
@@ -191,6 +228,8 @@ class Game {
       this.enemyArr.shift();
     }
   };
+
+  // ELEMENTOS DECORATIVOS EN MOVIMINTO 
   redLineAparecen = () => {
     if (this.redLineArr.length === 0 || this.frames % 60 === 0) {
       let redLineArriba = new RedLine(0, true);
@@ -233,17 +272,14 @@ class Game {
     }
   };
 
-  automaticMovement = () => {
-    this.x -= 2;
-    this.positionUpdate();
-  };
+  
 
   gameLoop = () => {
     this.frames++;
     this.alonso.movimientoContinuo();
-    this.randomItemAparece();
-    this.randomItemDesaparece();
-    this.lvlUp();
+    this.randomItemLvlUp();
+    this.randomItemLvlUpDesaparece();
+    this.lvlUpCollition();
     this.alonsoUpdate();
     this.rivalesAparecen();
     this.enemyArr.forEach((rival) => {
