@@ -19,37 +19,10 @@ class Game {
     this.itemDisapearTime = 3000;
 
     this.frames = 0;
-    this.counter = -1;
+    this.counter = 30;
     this.vida = 3;
+    
   }
-
-  // MOVIMIENTO DEL PERSONAJE PRINCIPAL
-
-  movimientoAlonsoTeclado = () => {
-    window.addEventListener("keydown", (event) => {
-      if (this.isGameOn === true && this.moreSpeed === false) {
-        if (event.key === "ArrowRight" && this.alonso.x <= 800) {
-          this.alonso.x += 50;
-        } else if (event.key === "ArrowLeft" && this.alonso.x >= 0) {
-          this.alonso.x -= 50;
-        } else if (event.key === "ArrowDown" && this.alonso.y <= 300) {
-          this.alonso.y += 50;
-        } else if (event.key === "ArrowUp" && this.alonso.y >= 30) {
-          this.alonso.y -= 50;
-        }
-      } else if (this.isGameOn === true && this.moreSpeed === true) {
-        if (event.key === "ArrowRight" && this.alonso.x <= 800) {
-          this.alonso.x += 100;
-        } else if (event.key === "ArrowLeft" && this.alonso.x >= 0) {
-          this.alonso.x -= 100;
-        } else if (event.key === "ArrowDown" && this.alonso.y <= 300) {
-          this.alonso.y += 100;
-        } else if (event.key === "ArrowUp" && this.alonso.y >= 30) {
-          this.alonso.y -= 100;
-        }
-      }
-    });
-  };
 
   // SE AÑADEN VIDAS AL INICIAR EL JUEGO
   vidasLayout = () => {
@@ -71,37 +44,6 @@ class Game {
     vidaNode.append(this.vida3);
   };
 
-  // COLISION QUE RESTA VIDAS (VIDAS = 0 GAME OVER)
-  gameOverCollition = () => {
-    this.enemyArr.forEach((cadaRival, index) => {
-      if (
-        this.alonso.x < cadaRival.x + cadaRival.w &&
-        this.alonso.x + this.alonso.w > cadaRival.x &&
-        this.alonso.y < cadaRival.y + cadaRival.h &&
-        this.alonso.y + this.alonso.h > cadaRival.y
-      ) {
-        if (this.vida <= 0) {
-          this.gameOver();
-        } else {
-          vidaNode.removeChild(vidaNode.lastChild);
-
-          cadaRival.rivalNode.remove();
-          this.enemyArr.splice(index, 1);
-          this.vida--;
-        }
-      }
-    });
-  };
-
-  // EL COCHE SE ACTUALIZA EN FUNCION A LAS CARRERAS GANADAS
-  alonsoUpdate = () => {
-    if (this.counter >= 14 && this.counter < 24) {
-      this.alonso.carNode.src = "./images/alonso-2.png";
-    } else if (this.counter >= 24) {
-      this.alonso.carNode.src = "./images/alonso-3.png";
-    }
-  };
-
   // CONDICION PARA GANAR EL JUEGO Y PERDER EL JUEGO
   win = () => {
     // HAY QUE AÑADIR QUE SE ELIMINEN LOS OBSTACULOS PARA QUE NO SALGA EL GAME-OVER
@@ -121,6 +63,15 @@ class Game {
     gameScreenNode.innerHTML = "";
     musicCarrera.remove();
     musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
+  };
+
+  // EL COCHE SE ACTUALIZA EN FUNCION A LAS CARRERAS GANADAS
+  alonsoUpdate = () => {
+    if (this.counter >= 14 && this.counter < 24) {
+      this.alonso.carNode.src = "./images/alonso-2.png";
+    } else if (this.counter >= 24) {
+      this.alonso.carNode.src = "./images/alonso-3.png";
+    }
   };
 
   // ITEMS ALEATORIOS CON DISTINTAS FUNCIONES:
@@ -168,7 +119,7 @@ class Game {
   // ITEM QUE TE AUMENTA LA MOVILIDAD (SONIC)
   randomItemSpeed = () => {
     let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
-    if (this.frames % 500 === 0) {
+    if (this.frames % randomNumberFrame === 0) {
       let randomX =
         300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
       let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 50));
@@ -198,23 +149,21 @@ class Game {
         cadaItem.itemSpeedNode.remove();
         this.speedCounter = 3;
         this.speedArr.splice(index, 1);
-        
 
         this.speedCountDown();
       }
     });
   };
-  speedCountDown =() => {
+  speedCountDown = () => {
     if (this.speedCounter > 0) {
       this.speedCounter--;
-      speedCounterNode.innerHTML = `<h3>TIEMPO DE VELOCIDAD RESTANTE ${this.speedCounter} SEGUNDOS</h3>`;
-      setTimeout(this.speedCountDown, 1000); 
+      speedCounterNode.innerHTML = `<h2>TIEMPO DE VELOCIDAD RESTANTE ${this.speedCounter} SEGUNDOS</h2>`;
+      setTimeout(this.speedCountDown, 1000);
     } else {
       this.moreSpeed = false;
       speedCounterNode.innerHTML = "";
     }
-  }
-
+  };
 
   // FUNCIONES RELACIONADAS CON LOS ENEMIGOS
 
@@ -277,6 +226,27 @@ class Game {
       this.enemyArr.shift();
     }
   };
+  // COLISION QUE RESTA VIDAS CON RIVAL (VIDAS = 0 GAME OVER)
+  rivalCollition = () => {
+    this.enemyArr.forEach((cadaRival, index) => {
+      if (
+        this.alonso.x < cadaRival.x + cadaRival.w &&
+        this.alonso.x + this.alonso.w > cadaRival.x &&
+        this.alonso.y < cadaRival.y + cadaRival.h &&
+        this.alonso.y + this.alonso.h > cadaRival.y
+      ) {
+        if (this.vida <= 0) {
+          this.gameOver();
+        } else {
+          vidaNode.removeChild(vidaNode.lastChild);
+
+          cadaRival.rivalNode.remove();
+          this.enemyArr.splice(index, 1);
+          this.vida--;
+        }
+      }
+    });
+  };
 
   // ELEMENTOS DECORATIVOS EN MOVIMINTO
   redLineAparecen = () => {
@@ -312,13 +282,25 @@ class Game {
     }
   };
   raceLineDesaparecen = () => {
-    if (this.raceLineArr[0].x < -60) {
-      this.raceLineArr[0].raceLineNode.remove();
-      this.raceLineArr.shift();
-
-      this.counter++;
-      counterNode.innerText = this.counter;
+    if (this.counter > -1 && this.counter < 32){
+      if (this.raceLineArr[0].x < -60) {
+        this.raceLineArr[0].raceLineNode.remove();
+        this.raceLineArr.shift();
+  
+        this.counter++;
+        counterNode.innerText = this.counter;
+      }
+    } else if (this.counter === -1 || this.counter === 32){
+      if (this.raceLineArr[0].x < -200) {
+        this.raceLineArr[0].raceLineNode.remove();
+        this.raceLineArr.shift();
+  
+        this.counter++;
+        counterNode.innerText = this.counter;
+      }
     }
+
+    
   };
 
   //  GAMELOOP
@@ -353,7 +335,7 @@ class Game {
       raceLine.automaticMovement();
     });
     this.raceLineDesaparecen();
-    this.gameOverCollition();
+    this.rivalCollition();
     this.win();
 
     if (this.isGameOn === true) {
