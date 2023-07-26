@@ -14,7 +14,7 @@ class RaceLine {
       this.w = 200;
       this.h = gameBoxNode.offsetHeight;
     } else if (gameObj.counter === 32) {
-      this.raceLineNode.src = "./images/start-line.png";
+      this.raceLineNode.src = "./images/finish-line.png";
       this.x = gameBoxNode.offsetWidth;
       this.y = 0;
       this.w = 200;

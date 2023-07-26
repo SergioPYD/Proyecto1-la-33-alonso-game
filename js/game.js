@@ -19,9 +19,8 @@ class Game {
     this.itemDisapearTime = 3000;
 
     this.frames = 0;
-    this.counter = 30;
+    this.counter = -1;
     this.vida = 3;
-    
   }
 
   // SE AÑADEN VIDAS AL INICIAR EL JUEGO
@@ -48,20 +47,18 @@ class Game {
   win = () => {
     // HAY QUE AÑADIR QUE SE ELIMINEN LOS OBSTACULOS PARA QUE NO SALGA EL GAME-OVER
     if (this.counter === 33) {
-      gameScreenNode.style.display = "none";
       winScreenNode.style.display = "flex";
-      gameScreenNode.innerHTML = "";
-      gameOverNode.innerHTML = "";
-      musicCarrera.remove();
+      gameScreenNode.style.display = "none";
+      gameBoxNode.innerHTML = "";
       musicWin.innerHTML = `<source src="./sound/win-sound.mp3" type="audio/mpeg">`;
     }
   };
   gameOver = () => {
     this.isGameOn = false;
-    gameScreenNode.style.display = "none";
     gameOverNode.style.display = "flex";
-    gameScreenNode.innerHTML = "";
-    musicCarrera.remove();
+    
+    gameScreenNode.style.display = "none";
+    gameBoxNode.innerHTML = "";
     musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
   };
 
@@ -282,27 +279,33 @@ class Game {
     }
   };
   raceLineDesaparecen = () => {
-    if (this.counter > -1 && this.counter < 32){
+    if (this.counter > -1 && this.counter < 32) {
       if (this.raceLineArr[0].x < -60) {
         this.raceLineArr[0].raceLineNode.remove();
         this.raceLineArr.shift();
-  
+
         this.counter++;
         counterNode.innerText = this.counter;
       }
-    } else if (this.counter === -1 || this.counter === 32){
+    } else if (this.counter === -1 || this.counter === 32) {
       if (this.raceLineArr[0].x < -200) {
         this.raceLineArr[0].raceLineNode.remove();
         this.raceLineArr.shift();
-  
+
         this.counter++;
-        counterNode.innerText = this.counter;
+        counterNode.innerHTML =`${this.counter}` ;
       }
     }
-
-    
   };
-
+  stageOnWeb = () => {
+    if (this.counter >= -1 && this.counter < 14) {
+      stageNode.innerHTML = `<h2> STAGE 1 </h2>`;
+    } else if (this.counter >= 14 && this.counter < 24) {
+      stageNode.innerHTML = `<h2> STAGE 2 </h2>`;
+    } else if (this.counter >= 24 && this.counter < 33) {
+      stageNode.innerHTML = `<h2> STAGE 3 </h2>`;
+    }
+  };
   //  GAMELOOP
 
   gameLoop = () => {
@@ -337,6 +340,7 @@ class Game {
     this.raceLineDesaparecen();
     this.rivalCollition();
     this.win();
+    this.stageOnWeb();
 
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);

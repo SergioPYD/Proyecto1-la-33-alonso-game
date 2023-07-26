@@ -7,6 +7,13 @@ body {
   text-align: center;
   background-image: url("../images/bg-body.jpg");
 }
+#instrucciones,
+#gameover-screen,
+#game-screen,#win
+ {
+  display: none;
+}
+
 h1 {
   font-family: "Orbitron", sans-serif;
   color: white;
@@ -51,7 +58,20 @@ p {
 #powerUps {
   height: 90px;
   display: flex;
-  justify-content:space-evenly ;
+  justify-content: space-between;
+  align-content: center;
+  align-items: baseline;
+  
+
+}
+#stage {
+ padding-right: 30px;
+width: 300px;
+}
+#speed {
+  padding-left: 30px;
+width:  400px;
+text-align: center;
 }
 
 .recuadro {
@@ -97,9 +117,3 @@ p {
   padding-top: 20px 0px;
 }
 
-#instrucciones,
-#gameover-screen,
-#game-screen,#win
- {
-  display: none;
-}
