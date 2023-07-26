@@ -8,46 +8,48 @@ class Game {
     this.whiteLineArr = [];
     this.raceLineArr = [];
     this.lvlUpArr = [];
+    this.speedArr = [];
 
     this.isGameOn = true;
     this.lvlUpShow = false;
     this.moreSpeed = false;
+    this.moreSpeedShow = false;
+    this.speedCounter = 0;
+    this.speedTime = 3000;
+    this.itemDisapearTime = 3000;
 
-    this.lvlUpTime = 3000;
     this.frames = 0;
     this.counter = -1;
     this.vida = 3;
-
-   
   }
 
-// MOVIMIENTO DEL PERSONAJE PRINCIPAL
+  // MOVIMIENTO DEL PERSONAJE PRINCIPAL
 
-  movimientoAlonsoTeclado = () =>{window.addEventListener("keydown", (event) => {
-  
-
-    if (this.isGameOn === true && this.moreSpeed ===false) {
-      if (event.key === "ArrowRight" && this.alonso.x  <= 800) { 
-        this.alonso.x += 50;
-      } else if (event.key === "ArrowLeft" && this.alonso.x  >= 0) {
-        this.alonso.x -= 50;
-      } else if (event.key === "ArrowDown" && this.alonso.y  <= 300) {
-        this.alonso.y += 50;
-      } else if (event.key === "ArrowUp" && this.alonso.y  >= 30) {
-        this.alonso.y -= 50;
+  movimientoAlonsoTeclado = () => {
+    window.addEventListener("keydown", (event) => {
+      if (this.isGameOn === true && this.moreSpeed === false) {
+        if (event.key === "ArrowRight" && this.alonso.x <= 800) {
+          this.alonso.x += 50;
+        } else if (event.key === "ArrowLeft" && this.alonso.x >= 0) {
+          this.alonso.x -= 50;
+        } else if (event.key === "ArrowDown" && this.alonso.y <= 300) {
+          this.alonso.y += 50;
+        } else if (event.key === "ArrowUp" && this.alonso.y >= 30) {
+          this.alonso.y -= 50;
+        }
+      } else if (this.isGameOn === true && this.moreSpeed === true) {
+        if (event.key === "ArrowRight" && this.alonso.x <= 800) {
+          this.alonso.x += 100;
+        } else if (event.key === "ArrowLeft" && this.alonso.x >= 0) {
+          this.alonso.x -= 100;
+        } else if (event.key === "ArrowDown" && this.alonso.y <= 300) {
+          this.alonso.y += 100;
+        } else if (event.key === "ArrowUp" && this.alonso.y >= 30) {
+          this.alonso.y -= 100;
+        }
       }
-    } else if (this.isGameOn === true && this.moreSpeed === true){
-      if (event.key === "ArrowRight" && this.alonso.x  <= 800) { 
-        this.alonso.x += 100;
-      } else if (event.key === "ArrowLeft" && this.alonso.x  >= 0) {
-        this.alonso.x -= 100;
-      } else if (event.key === "ArrowDown" && this.alonso.y  <= 300) {
-        this.alonso.y += 100;
-      } else if (event.key === "ArrowUp" && this.alonso.y  >= 30) {
-        this.alonso.y -= 100;
-      }
-    }
-  });}
+    });
+  };
 
   // SE AÑADEN VIDAS AL INICIAR EL JUEGO
   vidasLayout = () => {
@@ -69,7 +71,6 @@ class Game {
     vidaNode.append(this.vida3);
   };
 
-
   // COLISION QUE RESTA VIDAS (VIDAS = 0 GAME OVER)
   gameOverCollition = () => {
     this.enemyArr.forEach((cadaRival, index) => {
@@ -85,7 +86,7 @@ class Game {
           vidaNode.removeChild(vidaNode.lastChild);
 
           cadaRival.rivalNode.remove();
-          this.enemyArr.splice(index,1);
+          this.enemyArr.splice(index, 1);
           this.vida--;
         }
       }
@@ -122,8 +123,9 @@ class Game {
     musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
   };
 
-// ITEMS ALEATORIOS CON DISTINTAS FUNCIONES:
+  // ITEMS ALEATORIOS CON DISTINTAS FUNCIONES:
 
+  // ITEM QUE TE SUMA 1 VIDA (CORAZON)
   randomItemLvlUp = () => {
     let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
     if (this.frames % randomNumberFrame === 0) {
@@ -135,20 +137,11 @@ class Game {
       this.lvlUpShow = true;
       setTimeout(() => {
         this.lvlUpShow = false;
-      }, this.lvlUpTime);
+      }, this.itemDisapearTime);
     }
   };
-
-  randomItemLvlUpDesaparece = () => {
-    if (this.lvlUpShow === false && this.lvlUpArr.length > 0) {
-      
-      this.lvlUpArr[0].itemNode.remove();
-      this.lvlUpArr.shift();
-    }
-  };
-
   lvlUpCollition = () => {
-    this.lvlUpArr.forEach((cadaItem,index) => {
+    this.lvlUpArr.forEach((cadaItem, index) => {
       if (
         this.alonso.x < cadaItem.x + cadaItem.w &&
         this.alonso.x + this.alonso.w > cadaItem.x &&
@@ -161,12 +154,69 @@ class Game {
         vidaNode.append(this.vida4);
         this.vida++;
         cadaItem.itemNode.remove();
-        this.lvlUpArr.splice(index,1);
+        this.lvlUpArr.splice(index, 1);
       }
     });
   };
+  randomItemLvlUpDesaparece = () => {
+    if (this.lvlUpShow === false && this.lvlUpArr.length > 0) {
+      this.lvlUpArr[0].itemNode.remove();
+      this.lvlUpArr.shift();
+    }
+  };
 
-// FUNCIONES RELACIONADAS CON LOS ENEMIGOS
+  // ITEM QUE TE AUMENTA LA MOVILIDAD (SONIC)
+  randomItemSpeed = () => {
+    let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
+    if (this.frames % 500 === 0) {
+      let randomX =
+        300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
+      let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 50));
+      let newItem = new Speed(randomY, randomX);
+      this.speedArr.push(newItem);
+      this.moreSpeedShow = true;
+      setTimeout(() => {
+        this.moreSpeedShow = false;
+      }, this.itemDisapearTime);
+    }
+  };
+  randomItemSpeedUpDesaparece = () => {
+    if (this.moreSpeedShow === false && this.speedArr.length > 0) {
+      this.speedArr[0].itemSpeedNode.remove();
+      this.speedArr.shift();
+    }
+  };
+  SpeedCollition = () => {
+    this.speedArr.forEach((cadaItem, index) => {
+      if (
+        this.alonso.x < cadaItem.x + cadaItem.w &&
+        this.alonso.x + this.alonso.w > cadaItem.x &&
+        this.alonso.y < cadaItem.y + cadaItem.h &&
+        this.alonso.y + this.alonso.h > cadaItem.y
+      ) {
+        this.moreSpeed = true;
+        cadaItem.itemSpeedNode.remove();
+        this.speedCounter = 3;
+        this.speedArr.splice(index, 1);
+        
+
+        this.speedCountDown();
+      }
+    });
+  };
+  speedCountDown =() => {
+    if (this.speedCounter > 0) {
+      this.speedCounter--;
+      speedCounterNode.innerHTML = `<h3>TIEMPO DE VELOCIDAD RESTANTE ${this.speedCounter} SEGUNDOS</h3>`;
+      setTimeout(this.speedCountDown, 1000); 
+    } else {
+      this.moreSpeed = false;
+      speedCounterNode.innerHTML = "";
+    }
+  }
+
+
+  // FUNCIONES RELACIONADAS CON LOS ENEMIGOS
 
   rivalesAparecen = () => {
     const speedStageOne = 4;
@@ -221,7 +271,6 @@ class Game {
       }
     }
   };
-
   rivalesDesaparecen = () => {
     if (this.enemyArr[0].x < -250) {
       this.enemyArr[0].rivalNode.remove();
@@ -229,7 +278,7 @@ class Game {
     }
   };
 
-  // ELEMENTOS DECORATIVOS EN MOVIMINTO 
+  // ELEMENTOS DECORATIVOS EN MOVIMINTO
   redLineAparecen = () => {
     if (this.redLineArr.length === 0 || this.frames % 60 === 0) {
       let redLineArriba = new RedLine(0, true);
@@ -266,13 +315,13 @@ class Game {
     if (this.raceLineArr[0].x < -60) {
       this.raceLineArr[0].raceLineNode.remove();
       this.raceLineArr.shift();
-      
+
       this.counter++;
       counterNode.innerText = this.counter;
     }
   };
 
-  
+  //  GAMELOOP
 
   gameLoop = () => {
     this.frames++;
@@ -280,6 +329,9 @@ class Game {
     this.randomItemLvlUp();
     this.randomItemLvlUpDesaparece();
     this.lvlUpCollition();
+    this.SpeedCollition();
+    this.randomItemSpeedUpDesaparece();
+    this.randomItemSpeed();
     this.alonsoUpdate();
     this.rivalesAparecen();
     this.enemyArr.forEach((rival) => {

@@ -1,12 +1,7 @@
 class LvlUp {
   constructor(posY, posX) {
     this.itemNode = document.createElement("img");
-
     this.itemNode.src = "./images/1up.gif";
-
-    //AÑADIR OTRO ITEM else {
-    //     this.itemNode.src = "./images/1up.gif";
-    // }
     gameBoxNode.append(this.itemNode);
 
     this.x = posX;

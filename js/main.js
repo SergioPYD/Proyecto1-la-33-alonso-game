@@ -15,6 +15,9 @@ const musicWin = document.querySelector("#music3")
 const musicLose = document.querySelector("#music4")
 const winScreenNode =document.querySelector("#win")
 const winToInicioBtnNode = document.querySelector("#win-to-inicio")
+const speedCounterNode = document.querySelector("#speed")
+const lvlUpCounterNode = document.querySelector("#lvlUp")
+
 
 let gameObj = null;
 
@@ -73,7 +76,7 @@ winToInicioBtnNode.addEventListener("click", winToInicio)
 // window.addEventListener("keydown", (event) => {
   
 
-//   if (gameObj.isGameOn === true) {
+//   if (gameObj.isGameOn === true ) {
 //     if (event.key === "ArrowRight" && gameObj.alonso.x  <= 800) { 
 //       gameObj.alonso.x += 50;
 //     } else if (event.key === "ArrowLeft" && gameObj.alonso.x  >= 0) {

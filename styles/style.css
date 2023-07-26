@@ -45,8 +45,12 @@ p {
 #vidas {display: flex;
   justify-content: center;
   padding-left: 30px;
+}
 
-
+#powerUps {
+  height: 90px;
+  display: flex;
+  justify-content:space-evenly ;
 }
 
 .recuadro {
