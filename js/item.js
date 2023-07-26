@@ -1,4 +1,4 @@
-class Items {
+class LvlUp {
   constructor(posY, posX) {
     this.itemNode = document.createElement("img");
 

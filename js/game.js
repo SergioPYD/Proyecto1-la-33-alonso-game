@@ -130,7 +130,7 @@ class Game {
       let randomX =
         300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
       let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 50));
-      let newItem = new Items(randomY, randomX);
+      let newItem = new LvlUp(randomY, randomX);
       this.lvlUpArr.push(newItem);
       this.lvlUpShow = true;
       setTimeout(() => {
@@ -266,7 +266,7 @@ class Game {
     if (this.raceLineArr[0].x < -60) {
       this.raceLineArr[0].raceLineNode.remove();
       this.raceLineArr.shift();
-      // CONTADOR DE CARRERAS (BONUS:AJUSTAR UN POCO MÁS)
+      
       this.counter++;
       counterNode.innerText = this.counter;
     }
