@@ -6,7 +6,10 @@ const gameBoxNode = document.querySelector("#game-box");
 const instruccionesScreenNode = document.querySelector("#instrucciones");
 const inicioBtnInstructionsNode = document.querySelector("#inicio-instr-btn");
 const tryAgainBtnNode = document.querySelector("#tryAgain");
+const tryAgainHardcoreBtnNode =document.querySelector("#tryAgainHardcore")
+const gameOvertoInicioHardcoreBtnNode = document.querySelector("#inicio-btn-hardcore")
 const gameOverNode = document.querySelector("#gameover-screen");
+const gameOverHardcorNode = document.querySelector("#gameover-screen-hardcore")
 const startAgainNode = document.querySelector("#start-again-btn");
 const inicioBtnNode = document.querySelector("#inicio-btn");
 const counterNode = document.querySelector("#counter");
@@ -25,6 +28,7 @@ const winToInicioBtnNode = document.querySelector("#win-to-inicio");
 const speedCounterNode = document.querySelector("#speed");
 const stageNode = document.querySelector("#stage");
 const topViewNode = document.querySelector("#top-view");
+const hardcoreNode =document.querySelector("#hardcore")
 
 let gameObj = null;
 
@@ -40,7 +44,7 @@ function startGame() {
   musicCarrera.currentTime= 0;
   musicCarrera.play()
 
-  gameObj = new Game();
+  gameObj = new Game(true);
 
   gameObj.vidasLayout();
   gameObj.gameLoop();
@@ -62,14 +66,33 @@ function gameOvertoTryAgain() {
   musicLose.pause()
   musicCarrera.currentTime = 0;
   musicCarrera.play()
-  gameObj = new Game();
+  gameObj = new Game(true);
+  gameObj.vidasLayout();
+  gameObj.gameLoop();
+}
+function gameOverHardcoretoTryAgain() {
+  gameOverHardcorNode.style.display = "none";
+  inicioScreenNode.style.display = "none"
+  gameScreenNode.style.display = "flex";
+  musicLose.pause()
+  musicCarrera.currentTime = 0;
+  musicCarrera.play()
+  gameObj = new Game(false);
   gameObj.vidasLayout();
   gameObj.gameLoop();
 }
 
+
 function gameOverToInicio() {
   inicioScreenNode.style.display = "flex";
   gameOverNode.style.display = "none";
+  musicLose.pause()
+  musicInicio.currentTime = 0;
+  musicInicio.play()
+}
+function gameOverHarcoreToInicio() {
+  inicioScreenNode.style.display = "flex";
+  gameOverHardcorNode.style.display = "none";
   musicLose.pause()
   musicInicio.currentTime = 0;
   musicInicio.play()
@@ -84,6 +107,17 @@ function winToInicio() {
   
 
 }
+function winToHardcore() {
+  winScreenNode.style.display = "none";
+  gameScreenNode.style.display = "flex";
+  musicWin.pause()
+  musicCarrera.currentTime = 0;
+  musicCarrera.play()
+  gameObj = new Game(false);
+  gameObj.vidasLayout();
+  gameObj.gameLoop();
+}
+
 
 // ADD EVENT LISTENERS
 
@@ -93,7 +127,9 @@ inicioBtnInstructionsNode.addEventListener("click", instruccionesToInicio);
 inicioBtnNode.addEventListener("click", gameOverToInicio);
 winToInicioBtnNode.addEventListener("click", winToInicio);
 tryAgainBtnNode.addEventListener("click", gameOvertoTryAgain);
-
+tryAgainHardcoreBtnNode.addEventListener("click", gameOverHardcoretoTryAgain);
+hardcoreNode.addEventListener("click",winToHardcore )
+gameOvertoInicioHardcoreBtnNode.addEventListener("click",gameOverHarcoreToInicio)
 // MOVIMIENTOS DEL COCHE PRINCIPAL
 window.addEventListener("keydown", (event) => {
   if (gameObj.isGameOn === true && gameObj.moreSpeed === false) {

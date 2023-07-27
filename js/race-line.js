@@ -13,11 +13,17 @@ class RaceLine {
       this.y = 0;
       this.w = 200;
       this.h = gameBoxNode.offsetHeight;
-    } else if (gameObj.counter === 32) {
+    } else if (gameObj.counter === 32 && gameObj.stageOne === true) {
       this.raceLineNode.src = "./images/finish-line.png";
       this.x = gameBoxNode.offsetWidth;
       this.y = 0;
       this.w = 200;
+      this.h = gameBoxNode.offsetHeight;
+    } else if (gameObj.counter >= 32 && gameObj.stageOne === false) {
+      this.raceLineNode.src = "./images/race-line.png";
+      this.x = gameBoxNode.offsetWidth;
+      this.y = 0;
+      this.w = 60;
       this.h = gameBoxNode.offsetHeight;
     }
     gameBoxNode.append(this.raceLineNode);

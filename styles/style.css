@@ -10,7 +10,7 @@ body {
 #instrucciones,
 #gameover-screen,
 #game-screen,
-#win {
+#win,#gameover-screen-hardcore {
   display: none;
 }
 
@@ -72,7 +72,7 @@ p {
 }
 #speed {
   padding-left: 30px;
-  width: 400px;
+  width: 800px;
   text-align: center;
 }
 
@@ -125,7 +125,6 @@ p {
   justify-content:space-between;
   padding: 20px;
   gap: 40px;
-
   
 }
 
@@ -134,7 +133,7 @@ p {
 #inicio-instr-btn,
 #inicio-btn,
 #tryAgain,
-#win-to-inicio {
+#win-to-inicio,#hardcore,#inicio-btn-hardcore,#tryAgainHardcore {
   height: 40px;
   width: 200px;
   display: flex;
@@ -144,6 +143,7 @@ p {
   transition-duration: 0.4s;
   color: blue;
   border-radius: 20px;
+  
 }
 
 #inicio-instr-btn:hover {
@@ -176,6 +176,22 @@ p {
 }
 
 #win-to-inicio:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}
+
+#inicio-btn-hardcore:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}
+#tryAgainHardcore:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}
+#hardcore:hover {
   box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
   background-color: blue;
   color: white;

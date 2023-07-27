@@ -26,7 +26,7 @@ class Game {
     this.collitionSound.volume = 0.05;
     this.lifeUpSound = new Audio("sound/life-sound.mp3");
     this.lifeUpSound.volume = 0.05;
-    this.speedSound = new Audio ("sound/sonic.mp3");
+    this.speedSound = new Audio("sound/sonic.mp3");
     this.speedSound.volume = 0.05;
   }
 
@@ -53,34 +53,49 @@ class Game {
   // CONDICION PARA GANAR EL JUEGO Y PERDER EL JUEGO
   win = () => {
     // HAY QUE AÑADIR QUE SE ELIMINEN LOS OBSTACULOS PARA QUE NO SALGA EL GAME-OVER
-    if (this.counter === 33) {
-      this.isGameOn = false;
-      winScreenNode.style.display = "flex";
-      gameScreenNode.style.display = "none";
-      gameBoxNode.innerHTML = "";
-      vidaNode.innerHTML = "";
-      musicCarrera.pause();
-      musicWin.innerHTML = `<source src="./sound/win-sound.mp3" type="audio/mpeg">`;
-      counterNode.innerHTML = 0;
+
+    if (this.stageOne === true) {
+      if (this.counter === 33) {
+        this.isGameOn = false;
+        winScreenNode.style.display = "flex";
+        gameScreenNode.style.display = "none";
+        gameBoxNode.innerHTML = "";
+        vidaNode.innerHTML = "";
+        musicCarrera.pause();
+        musicWin.innerHTML = `<source src="./sound/win-sound.mp3" type="audio/mpeg">`;
+        counterNode.innerHTML = 0;
+      }
     }
   };
   gameOver = () => {
-    this.isGameOn = false;
-    gameOverNode.style.display = "flex";
+    if (this.stageOne === true) {
+      this.isGameOn = false;
+      gameOverNode.style.display = "flex";
 
-    gameScreenNode.style.display = "none";
-    gameBoxNode.innerHTML = "";
-    counterNode.innerHTML = 0;
-    musicCarrera.pause();
-    musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
+      gameScreenNode.style.display = "none";
+      gameBoxNode.innerHTML = "";
+      counterNode.innerHTML = 0;
+      musicCarrera.pause();
+      musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
+    } else if (this.stageOne === false) {
+      this.isGameOn = false;
+      gameOverHardcorNode.style.display = "flex";
+      gameScreenNode.style.display = "none";
+      gameBoxNode.innerHTML = "";
+      counterNode.innerHTML = 0;
+      musicCarrera.pause();
+      musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
+    }
   };
 
   // EL COCHE SE ACTUALIZA EN FUNCION A LAS CARRERAS GANADAS
   alonsoUpdate = () => {
-    if (this.counter >= 14 && this.counter < 24) {
-      this.alonso.carNode.src = "./images/alonso-2.png";
-    } else if (this.counter >= 24) {
-      this.alonso.carNode.src = "./images/alonso-3.png";
+    if (this.stageOne === true) {
+      if (this.counter >= 14 && this.counter < 24) {
+        this.alonso.carNode.src = "./images/alonso-2.png";
+      } else if (this.counter >= 24) {
+        this.alonso.carNode.src = "./images/alonso-3.png";
+      }
     }
   };
 
@@ -88,17 +103,21 @@ class Game {
 
   // ITEM QUE TE SUMA 1 VIDA (CORAZON)
   randomItemLvlUp = () => {
-    let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
-    if (this.frames % randomNumberFrame === 0) {
-      let randomX =
-        300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
-      let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 50));
-      let newItem = new LvlUp(randomY, randomX);
-      this.lvlUpArr.push(newItem);
-      this.lvlUpShow = true;
-      setTimeout(() => {
-        this.lvlUpShow = false;
-      }, this.itemDisapearTime);
+    if (this.stageOne === true) {
+      let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
+      if (this.frames % randomNumberFrame === 0) {
+        let randomX =
+          300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
+        let randomY = Math.floor(
+          Math.random() * (gameBoxNode.offsetHeight - 50)
+        );
+        let newItem = new LvlUp(randomY, randomX);
+        this.lvlUpArr.push(newItem);
+        this.lvlUpShow = true;
+        setTimeout(() => {
+          this.lvlUpShow = false;
+        }, this.itemDisapearTime);
+      }
     }
   };
   lvlUpCollition = () => {
@@ -116,7 +135,7 @@ class Game {
         this.vida++;
         cadaItem.itemNode.remove();
         this.lvlUpArr.splice(index, 1);
-        this.lifeUpSound.play()
+        this.lifeUpSound.play();
       }
     });
   };
@@ -129,17 +148,21 @@ class Game {
 
   // ITEM QUE TE AUMENTA LA MOVILIDAD (SONIC)
   randomItemSpeed = () => {
-    let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
-    if (this.frames % randomNumberFrame === 0) {
-      let randomX =
-        300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
-      let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 50));
-      let newItem = new Speed(randomY, randomX);
-      this.speedArr.push(newItem);
-      this.moreSpeedShow = true;
-      setTimeout(() => {
-        this.moreSpeedShow = false;
-      }, this.itemDisapearTime);
+    if (this.stageOne === true) {
+      let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
+      if (this.frames % randomNumberFrame === 0) {
+        let randomX =
+          300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
+        let randomY = Math.floor(
+          Math.random() * (gameBoxNode.offsetHeight - 50)
+        );
+        let newItem = new Speed(randomY, randomX);
+        this.speedArr.push(newItem);
+        this.moreSpeedShow = true;
+        setTimeout(() => {
+          this.moreSpeedShow = false;
+        }, this.itemDisapearTime);
+      }
     }
   };
   randomItemSpeedUpDesaparece = () => {
@@ -160,7 +183,7 @@ class Game {
         cadaItem.itemSpeedNode.remove();
         this.speedCounter = 3;
         this.speedArr.splice(index, 1);
-        this.speedSound.play()
+        this.speedSound.play();
         this.speedCountDown();
       }
     });
@@ -179,54 +202,73 @@ class Game {
   // FUNCIONES RELACIONADAS CON LOS ENEMIGOS
 
   rivalesAparecen = () => {
-    const speedStageOne = 4;
-    const speedStageTwo = 8;
-    const speedStageThree = 10;
-    //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN PRIMER STAGE
-    if (this.counter < 14) {
-      if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalArriba = new Rivales(randomNumberY, 1, speedStageOne);
-        this.enemyArr.push(rivalArriba);
-      } else if (this.frames % 500 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 1, speedStageOne);
-        this.enemyArr.push(rivalAbajo);
-      } else if (this.frames % 800 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 6, speedStageOne);
-        this.enemyArr.push(rivalAbajo);
+    if (this.stageOne === true) {
+      const speedStageOne = 4;
+      const speedStageTwo = 8;
+      const speedStageThree = 10;
+      //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN PRIMER STAGE
+      if (this.counter < 14) {
+        if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalArriba = new Rivales(randomNumberY, 1, speedStageOne);
+          this.enemyArr.push(rivalArriba);
+        } else if (this.frames % 500 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalAbajo = new Rivales(randomNumberY, 1, speedStageOne);
+          this.enemyArr.push(rivalAbajo);
+        } else if (this.frames % 800 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalAbajo = new Rivales(randomNumberY, 6, speedStageOne);
+          this.enemyArr.push(rivalAbajo);
+        }
       }
-    }
-    //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN SEGUNDO STAGE
-    else if (this.counter >= 14 && this.counter < 24) {
-      if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalArriba = new Rivales(randomNumberY, 3, speedStageTwo);
-        this.enemyArr.push(rivalArriba);
-      } else if (this.frames % 500 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 3, speedStageTwo);
-        this.enemyArr.push(rivalAbajo);
-      } else if (this.frames % 800 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 2, speedStageTwo);
-        this.enemyArr.push(rivalAbajo);
+      //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN SEGUNDO STAGE
+      else if (this.counter >= 14 && this.counter < 24) {
+        if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalArriba = new Rivales(randomNumberY, 3, speedStageTwo);
+          this.enemyArr.push(rivalArriba);
+        } else if (this.frames % 500 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalAbajo = new Rivales(randomNumberY, 3, speedStageTwo);
+          this.enemyArr.push(rivalAbajo);
+        } else if (this.frames % 800 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalAbajo = new Rivales(randomNumberY, 2, speedStageTwo);
+          this.enemyArr.push(rivalAbajo);
+        }
       }
-    }
-    //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN TERCER STAGE
-    else if (this.counter >= 24) {
-      if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
+      //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN TERCER STAGE
+      else if (this.counter >= 24) {
+        if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalArriba = new Rivales(randomNumberY, 4, speedStageThree);
+          this.enemyArr.push(rivalArriba);
+        } else if (this.frames % 700 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalAbajo = new Rivales(randomNumberY, 4, speedStageThree);
+          this.enemyArr.push(rivalAbajo);
+        } else if (this.frames % 500 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 400);
+          let rivalAbajo = new Rivales(randomNumberY, 5, speedStageThree);
+          this.enemyArr.push(rivalAbajo);
+        }
+      }
+    } else if (this.stageOne === false) {
+      const speedStageHardcore = 10;
+      //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN HARDCORE
+
+      if (this.enemyArr.length === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalArriba = new Rivales(randomNumberY, 4, speedStageThree);
+        let rivalArriba = new Rivales(randomNumberY, 1, speedStageHardcore);
         this.enemyArr.push(rivalArriba);
-      } else if (this.frames % 700 === 0) {
+      } else if (this.frames % 300 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 4, speedStageThree);
+        let rivalAbajo = new Rivales(randomNumberY, 3, speedStageHardcore);
         this.enemyArr.push(rivalAbajo);
       } else if (this.frames % 500 === 0) {
         let randomNumberY = Math.floor(Math.random() * 400);
-        let rivalAbajo = new Rivales(randomNumberY, 5, speedStageThree);
+        let rivalAbajo = new Rivales(randomNumberY, 4, speedStageHardcore);
         this.enemyArr.push(rivalAbajo);
       }
     }
@@ -296,31 +338,55 @@ class Game {
     }
   };
   raceLineDesaparecen = () => {
-    if (this.counter > -1 && this.counter < 32) {
-      if (this.raceLineArr[0].x < -60) {
-        this.raceLineArr[0].raceLineNode.remove();
-        this.raceLineArr.shift();
+    if (this.stageOne === true) {
+      if (this.counter > -1 && this.counter < 32) {
+        if (this.raceLineArr[0].x < -60) {
+          this.raceLineArr[0].raceLineNode.remove();
+          this.raceLineArr.shift();
 
-        this.counter++;
-        counterNode.innerText = this.counter;
+          this.counter++;
+          counterNode.innerText = this.counter;
+        }
+      } else if (this.counter === -1 || this.counter === 32) {
+        if (this.raceLineArr[0].x < -200) {
+          this.raceLineArr[0].raceLineNode.remove();
+          this.raceLineArr.shift();
+
+          this.counter++;
+          counterNode.innerHTML = `${this.counter}`;
+        }
       }
-    } else if (this.counter === -1 || this.counter === 32) {
-      if (this.raceLineArr[0].x < -200) {
-        this.raceLineArr[0].raceLineNode.remove();
-        this.raceLineArr.shift();
+    } else if (this.stageOne === false) {
+      if (this.counter > -1) {
+        if (this.raceLineArr[0].x < -60) {
+          this.raceLineArr[0].raceLineNode.remove();
+          this.raceLineArr.shift();
 
-        this.counter++;
-        counterNode.innerHTML = `${this.counter}`;
+          this.counter++;
+          counterNode.innerText = this.counter;
+        }
+      } else if (this.counter === -1) {
+        if (this.raceLineArr[0].x < -200) {
+          this.raceLineArr[0].raceLineNode.remove();
+          this.raceLineArr.shift();
+
+          this.counter++;
+          counterNode.innerHTML = `${this.counter}`;
+        }
       }
     }
   };
   stageOnWeb = () => {
-    if (this.counter >= -1 && this.counter < 14) {
-      stageNode.innerHTML = `<h2> STAGE 1 </h2>`;
-    } else if (this.counter >= 14 && this.counter < 24) {
-      stageNode.innerHTML = `<h2> STAGE 2 </h2>`;
-    } else if (this.counter >= 24 && this.counter < 33) {
-      stageNode.innerHTML = `<h2> STAGE 3 </h2>`;
+    if (this.stageOne === true) {
+      if (this.counter >= -1 && this.counter < 14) {
+        stageNode.innerHTML = `<h2> STAGE 1 </h2>`;
+      } else if (this.counter >= 14 && this.counter < 24) {
+        stageNode.innerHTML = `<h2> STAGE 2 </h2>`;
+      } else if (this.counter >= 24 && this.counter < 33) {
+        stageNode.innerHTML = `<h2> STAGE 3 </h2>`;
+      }
+    } else if (this.stageOne === false) {
+      stageNode.innerHTML = `<h2> HARDCOREMODE </h2>`;
     }
   };
   //  GAMELOOP

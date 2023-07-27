@@ -71,14 +71,27 @@
         <button id="tryAgain">INTENTALO DE NUEVO</button>
       </div>
     </div>
+
+    <!-- GAME OVER HARDCORE MODE  -->
+    <div id="gameover-screen-hardcore" class="recuadro">
+      <audio id="music4" controls autoplay></audio>
+      <h1>GAME OVER HARDCORE MODE</h1>
+      <img src="./images/game-over.jpg" width="800" alt="game-over" />
+      <div class="btn-positionGameOver">
+        <!-- <button id="start-again-btn">START AGAIN</button> -->
+        <button id="inicio-btn-hardcore">INICIO</button>
+        <button id="tryAgainHardcore">INTENTALO DE NUEVO</button>
+      </div>
+    </div>
     <!-- WIN GAME
      SCREEN -->
     <div id="win" class="recuadro">
       <audio id="music3" controls autoplay></audio>
       <h1>¡¡¡LO LOGRASTE!!!</h1>
       <div><img src="./images/win.gif" alt="ganaste" width="600" /></div>
-      <div class="btn-position">
+      <div class="btn-positionGameOver">
         <button id="win-to-inicio">VUELVE A INTENTARLO</button>
+        <button id="hardcore">MODO HARDCORE</button>
       </div>
     </div>
     <script src="./js/itemLvlUp.js"></script>
