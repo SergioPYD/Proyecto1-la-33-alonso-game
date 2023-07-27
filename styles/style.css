@@ -9,8 +9,8 @@ body {
 }
 #instrucciones,
 #gameover-screen,
-#game-screen,#win
- {
+#game-screen,
+#win {
   display: none;
 }
 
@@ -21,8 +21,7 @@ h1 {
 }
 p {
   font-family: "Orbitron", sans-serif;
-  }
-
+}
 
 #game-screen h2 {
   font-family: "Orbitron", sans-serif;
@@ -35,22 +34,27 @@ p {
   text-align: center;
 }
 
-#music1,#music2,#music3,#music4 {
+#music1,
+#music2,
+#music3,
+#music4,
+#music5 {
   display: none;
 }
 #top-view {
   height: 90px;
   display: flex;
-  align-items:center;
+  align-items: center;
 }
 #vidas-screen {
   padding-left: 10px;
   padding-right: 50px;
   display: flex;
-  justify-content:space-around;
-  flex-direction:row
+  justify-content: space-around;
+  flex-direction: row;
 }
-#vidas {display: flex;
+#vidas {
+  display: flex;
   justify-content: center;
   padding-left: 30px;
 }
@@ -61,17 +65,15 @@ p {
   justify-content: space-between;
   align-content: center;
   align-items: baseline;
-  
-
 }
 #stage {
- padding-right: 30px;
-width: 300px;
+  padding-right: 30px;
+  width: 300px;
 }
 #speed {
   padding-left: 30px;
-width:  400px;
-text-align: center;
+  width: 400px;
+  text-align: center;
 }
 
 .recuadro {
@@ -87,17 +89,15 @@ text-align: center;
   width: 1150px;
   height: 450px;
   overflow: hidden;
-  position: relative; 
-  user-select: none; 
+  position: relative;
+  user-select: none;
   background-image: url("../images/bg-game.png");
   background-position: center;
   background-size: contain;
 }
-#top-view  {
+#top-view {
   display: flex;
   justify-content: space-around;
-
-  
 }
 #inicio {
   display: flex;
@@ -113,7 +113,70 @@ text-align: center;
 .btn-position {
   display: flex;
   flex-direction: row;
-  justify-content:space-around;
-  padding-top: 20px 0px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
+.btn-positionGameOver {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+  padding: 20px;
+  gap: 40px;
+
+  
+}
+
+#start-btn,
+#instr-btn,
+#inicio-instr-btn,
+#inicio-btn,
+#tryAgain,
+#win-to-inicio {
+  height: 40px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px 0 white, 0 6px 20px 0 white;
+  transition-duration: 0.4s;
+  color: blue;
+  border-radius: 20px;
+}
+
+#inicio-instr-btn:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}
+#start-btn:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}
+#instr-btn:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}
+
+
+#inicio-btn:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}
+
+#tryAgain:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}
+
+#win-to-inicio:hover {
+  box-shadow: 0 12px 16px 0 cornflowerblue, 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: blue;
+  color: white;
+}

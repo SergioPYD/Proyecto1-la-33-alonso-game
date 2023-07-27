@@ -1,7 +1,7 @@
 class Game {
-  constructor() {
+  constructor(stageOne) {
+    this.stageOne = stageOne;
     this.alonso = new Alonso();
-
     this.enemyArr = [];
     this.powerUppArr = [];
     this.redLineArr = [];
@@ -14,6 +14,7 @@ class Game {
     this.lvlUpShow = false;
     this.moreSpeed = false;
     this.moreSpeedShow = false;
+
     this.speedCounter = 0;
     this.speedTime = 3000;
     this.itemDisapearTime = 3000;
@@ -21,6 +22,12 @@ class Game {
     this.frames = 0;
     this.counter = -1;
     this.vida = 3;
+    this.collitionSound = new Audio("sound/choque.mp3");
+    this.collitionSound.volume = 0.05;
+    this.lifeUpSound = new Audio("sound/life-sound.mp3");
+    this.lifeUpSound.volume = 0.05;
+    this.speedSound = new Audio ("sound/sonic.mp3");
+    this.speedSound.volume = 0.05;
   }
 
   // SE AÑADEN VIDAS AL INICIAR EL JUEGO
@@ -47,18 +54,24 @@ class Game {
   win = () => {
     // HAY QUE AÑADIR QUE SE ELIMINEN LOS OBSTACULOS PARA QUE NO SALGA EL GAME-OVER
     if (this.counter === 33) {
+      this.isGameOn = false;
       winScreenNode.style.display = "flex";
       gameScreenNode.style.display = "none";
       gameBoxNode.innerHTML = "";
+      vidaNode.innerHTML = "";
+      musicCarrera.pause();
       musicWin.innerHTML = `<source src="./sound/win-sound.mp3" type="audio/mpeg">`;
+      counterNode.innerHTML = 0;
     }
   };
   gameOver = () => {
     this.isGameOn = false;
     gameOverNode.style.display = "flex";
-    
+
     gameScreenNode.style.display = "none";
     gameBoxNode.innerHTML = "";
+    counterNode.innerHTML = 0;
+    musicCarrera.pause();
     musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
   };
 
@@ -103,6 +116,7 @@ class Game {
         this.vida++;
         cadaItem.itemNode.remove();
         this.lvlUpArr.splice(index, 1);
+        this.lifeUpSound.play()
       }
     });
   };
@@ -146,7 +160,7 @@ class Game {
         cadaItem.itemSpeedNode.remove();
         this.speedCounter = 3;
         this.speedArr.splice(index, 1);
-
+        this.speedSound.play()
         this.speedCountDown();
       }
     });
@@ -236,13 +250,16 @@ class Game {
           this.gameOver();
         } else {
           vidaNode.removeChild(vidaNode.lastChild);
-
           cadaRival.rivalNode.remove();
           this.enemyArr.splice(index, 1);
           this.vida--;
+          this.sonidoColision();
         }
       }
     });
+  };
+  sonidoColision = () => {
+    this.collitionSound.play();
   };
 
   // ELEMENTOS DECORATIVOS EN MOVIMINTO
@@ -293,7 +310,7 @@ class Game {
         this.raceLineArr.shift();
 
         this.counter++;
-        counterNode.innerHTML =`${this.counter}` ;
+        counterNode.innerHTML = `${this.counter}`;
       }
     }
   };
@@ -315,6 +332,7 @@ class Game {
     this.randomItemLvlUpDesaparece();
     this.lvlUpCollition();
     this.SpeedCollition();
+
     this.randomItemSpeedUpDesaparece();
     this.randomItemSpeed();
     this.alonsoUpdate();

@@ -11,26 +11,34 @@ const startAgainNode = document.querySelector("#start-again-btn");
 const inicioBtnNode = document.querySelector("#inicio-btn");
 const counterNode = document.querySelector("#counter");
 const musicInicio = document.querySelector("#music1");
+musicInicio.volume = 0.1;
 const musicCarrera = document.querySelector("#music2");
+musicCarrera.volume = 0.1;
 const musicWin = document.querySelector("#music3");
+musicWin.volume = 0.1;
 const musicLose = document.querySelector("#music4");
+musicLose.volume = 0.1;
+const musicCrash = document.querySelector("#music5");
+musicCrash.volume = 0.1;
 const winScreenNode = document.querySelector("#win");
 const winToInicioBtnNode = document.querySelector("#win-to-inicio");
 const speedCounterNode = document.querySelector("#speed");
 const stageNode = document.querySelector("#stage");
+const topViewNode = document.querySelector("#top-view");
 
 let gameObj = null;
 
 musicInicio.innerHTML = `<source src="./sound/intro-music.mp3" type="audio/mpeg">`;
 const vidaNode = document.querySelector("#vidas");
-
 // FUNCIONES INICIALES
 
 function startGame() {
   inicioScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
-  musicInicio.remove();
   musicCarrera.innerHTML = `<source src="./sound/audio-carrera.mp3" type="audio/mpeg">`;
+  musicInicio.pause();
+  musicCarrera.currentTime= 0;
+  musicCarrera.play()
 
   gameObj = new Game();
 
@@ -50,24 +58,31 @@ function instruccionesToInicio() {
 
 function gameOvertoTryAgain() {
   gameOverNode.style.display = "none";
-    gameScreenNode.style.display = "flex";
+  gameScreenNode.style.display = "flex";
+  musicLose.pause()
+  musicCarrera.currentTime = 0;
+  musicCarrera.play()
   gameObj = new Game();
- gameObj.vidasLayout();
+  gameObj.vidasLayout();
   gameObj.gameLoop();
 }
 
 function gameOverToInicio() {
   inicioScreenNode.style.display = "flex";
   gameOverNode.style.display = "none";
-  winScreenNode.style.display = "none"
-  musicInicio.innerHTML = `<source src="./sound/intro-music.mp3" type="audio/mpeg">`;
-  }
+  musicLose.pause()
+  musicInicio.currentTime = 0;
+  musicInicio.play()
+}
 
 function winToInicio() {
   winScreenNode.style.display = "none";
   inicioScreenNode.style.display = "flex";
+  musicWin.pause()
+  musicInicio.currentTime = 0;
+  musicInicio.play()
+  
 
-  location.reload();
 }
 
 // ADD EVENT LISTENERS

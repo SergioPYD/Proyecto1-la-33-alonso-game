@@ -13,7 +13,7 @@
     <!-- INICIO -->
 
     <div id="inicio" class="recuadro">
-      <audio id="music1" controls muted></audio>
+      <audio id="music1" controls autoplay></audio>
       <h1>"LA 33" GAME OF THE YEAR EDITION</h1>
 
       <div class="btn-position">
@@ -40,15 +40,20 @@
 
     <!-- GAME SCREEN -->
     <div id="game-screen" class="recuadro">
-      <audio id="music2" controls muted></audio>
+      
+      <audio id="music2" controls autoplay></audio>
+      
       <div id="top-view">
+        <audio id="music5" controls autoplay></audio>
         <div id="vidas-screen">
           <h2>VIDAS</h2>
           <div id="vidas"></div>
         </div>
         <h2>CONTADOR DE CARRERAS <span id="counter">0</span></h2>
       </div>
-      <div id="game-box"></div>
+      <div id="game-box">
+        
+      </div>
       <div id="powerUps">
         <div id="speed"></div>
         <div id="stage"></div>
@@ -57,10 +62,10 @@
 
     <!-- GAME OVER SCREEN -->
     <div id="gameover-screen" class="recuadro">
-      <audio id="music4" controls muted></audio>
+      <audio id="music4" controls autoplay></audio>
       <h1>GAME OVER</h1>
       <img src="./images/game-over.jpg" width="800" alt="game-over" />
-      <div class="btn-position">
+      <div class="btn-positionGameOver">
         <!-- <button id="start-again-btn">START AGAIN</button> -->
         <button id="inicio-btn">INICIO</button>
         <button id="tryAgain">INTENTALO DE NUEVO</button>
@@ -69,7 +74,7 @@
     <!-- WIN GAME
      SCREEN -->
     <div id="win" class="recuadro">
-      <audio id="music3" controls muted></audio>
+      <audio id="music3" controls autoplay></audio>
       <h1>¡¡¡LO LOGRASTE!!!</h1>
       <div><img src="./images/win.gif" alt="ganaste" width="600" /></div>
       <div class="btn-position">
