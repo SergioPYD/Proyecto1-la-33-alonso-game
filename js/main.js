@@ -28,7 +28,8 @@ const winToInicioBtnNode = document.querySelector("#win-to-inicio");
 const speedCounterNode = document.querySelector("#speed");
 const stageNode = document.querySelector("#stage");
 const topViewNode = document.querySelector("#top-view");
-const hardcoreNode =document.querySelector("#hardcore")
+const hardcoreNode =document.querySelector("#hardcore");
+const imagenRandomNode = document.querySelector("#imagen-random")
 
 let gameObj = null;
 
@@ -39,6 +40,7 @@ const vidaNode = document.querySelector("#vidas");
 function startGame() {
   inicioScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
+
   musicCarrera.innerHTML = `<source src="./sound/audio-carrera.mp3" type="audio/mpeg">`;
   musicInicio.pause();
   musicCarrera.currentTime= 0;
@@ -140,7 +142,7 @@ window.addEventListener("keydown", (event) => {
       gameObj.alonso.x += speed;
     } else if (event.key === "ArrowLeft" && gameObj.alonso.x >= 0) {
       gameObj.alonso.x -= speed;
-    } else if (event.key === "ArrowDown" && gameObj.alonso.y <= 300) {
+    } else if (event.key === "ArrowDown" && gameObj.alonso.y <= 330) {
       gameObj.alonso.y += speed;
     } else if (event.key === "ArrowUp" && gameObj.alonso.y >= 30) {
       gameObj.alonso.y -= speed;
@@ -181,8 +183,8 @@ window.addEventListener("keydown", (event) => {
       gameObj.alonso.x -= diagonalSpeed;
     }
   } else if (gameObj.isGameOn === true && gameObj.moreSpeed === true) {
-    const upSpeed = 100;
-    const diagonalSpeed = 100;
+    const upSpeed = 80;
+    const diagonalSpeed = 120;
 
     if (event.key === "ArrowRight" && gameObj.alonso.x <= 800) {
       gameObj.alonso.x += upSpeed;
@@ -190,7 +192,7 @@ window.addEventListener("keydown", (event) => {
       gameObj.alonso.x -= upSpeed;
     } else if (event.key === "ArrowDown" && gameObj.alonso.y <= 300) {
       gameObj.alonso.y += upSpeed;
-    } else if (event.key === "ArrowUp" && gameObj.alonso.y >= 30) {
+    } else if (event.key === "ArrowUp" && gameObj.alonso.y >= 60) {
       gameObj.alonso.y -= upSpeed;
     }
 

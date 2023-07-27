@@ -11,17 +11,27 @@ class Rivales {
       this.rivalNode.src = "./images/enemy4.png";
     } else if (cocheArriba === 5) {
       this.rivalNode.src = "./images/enemy5.png";
-    }else if (cocheArriba === 6) {
+    } else if (cocheArriba === 6) {
       this.rivalNode.src = "./images/enemy6.png";
+    } else if (cocheArriba === 7) {
+      this.rivalNode.src = "./images/enemy7.png";
+    } else if (cocheArriba === 8) {
+      this.rivalNode.src = "./images/enemy8.png";
     }
 
-
     gameBoxNode.append(this.rivalNode);
+    if (cocheArriba === 8) {
+      this.x = gameBoxNode.offsetWidth;
+      this.y = posY;
+      this.w = 300;
+      this.h = 200;
+    } else {
+      this.x = gameBoxNode.offsetWidth;
+      this.y = posY;
+      this.w = 200;
+      this.h = 70;
+    }
 
-    this.x = gameBoxNode.offsetWidth;
-    this.y = posY;
-    this.w = 200;
-    this.h = 70;
     this.velocidad = speed;
     this.rivalNode.style.width = `${this.w}px`;
     this.rivalNode.style.height = `${this.h}px`;

@@ -19,9 +19,19 @@ h1 {
   color: white;
   font-size: 2.5rem;
 }
+h2 {
+  font-family: "Orbitron", sans-serif;
+  color: white;
+  font-size: 2rem;
+}
+
 p {
   font-family: "Orbitron", sans-serif;
 }
+button {
+  font-family: "Orbitron", sans-serif;
+}
+
 
 #game-screen h2 {
   font-family: "Orbitron", sans-serif;
@@ -73,7 +83,15 @@ p {
 #speed {
   padding-left: 30px;
   width: 800px;
-  text-align: center;
+  text-align: left;
+  position: relative;
+  bottom: 17px;
+  
+
+}
+#speed h2{
+  font-size: 1.6rem;
+
 }
 
 .recuadro {
@@ -81,7 +99,7 @@ p {
   flex-direction: column;
   justify-content: center;
   margin: 100px;
-  background-color: cadetblue;
+  
 }
 
 #game-box {
@@ -94,12 +112,21 @@ p {
   background-image: url("../images/bg-game.png");
   background-position: center;
   background-size: contain;
+  
 }
-#top-view {
+#top-view,#powerUps {
   display: flex;
   justify-content: space-around;
+  background-image: url("../images/div-background.png");
+}
+ 
+
+#gameover-screen,#gameover-screen-hardcore,#win {
+  
+  background-image: url("../images/div-background.png");
 }
 #inicio {
+ 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -107,8 +134,20 @@ p {
   width: 1200px;
   height: 450px;
   background-image: url("../images/bg-renault.png");
-  background-repeat: repeat;
+  background-repeat:no-repeat;
   background-size: cover;
+  background-position: left;
+  background-color: black;
+}
+#inicio h1{
+  padding-top: 12px;
+    -webkit-text-stroke: 3.5px darkblue;
+    text-shadow:2px 2px 2px white;
+  text-decoration: double;
+  color:yellow;
+  font-size: 3.2rem;
+  position: relative;
+  top:30px
 }
 .btn-position {
   display: flex;
@@ -116,6 +155,7 @@ p {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  
 }
 
 .btn-positionGameOver {
@@ -128,12 +168,24 @@ p {
   
 }
 
+#start-btn,#instr-btn {
+  position: relative;
+  bottom: 30px;
+}
+#center-img{
+  position: relative;
+  bottom:11px
+}
+
+
+
 #start-btn,
 #instr-btn,
 #inicio-instr-btn,
 #inicio-btn,
 #tryAgain,
 #win-to-inicio,#hardcore,#inicio-btn-hardcore,#tryAgainHardcore {
+  font-weight: 600;
   height: 40px;
   width: 200px;
   display: flex;
@@ -143,6 +195,13 @@ p {
   transition-duration: 0.4s;
   color: blue;
   border-radius: 20px;
+  
+  
+}
+
+#inicio-instr-btn{
+  position: absolute;
+  top: 500px;
   
 }
 

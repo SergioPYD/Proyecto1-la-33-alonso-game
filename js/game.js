@@ -28,6 +28,8 @@ class Game {
     this.lifeUpSound.volume = 0.05;
     this.speedSound = new Audio("sound/sonic.mp3");
     this.speedSound.volume = 0.05;
+    this.onvniSound = new Audio("sound/ovni.mp3")
+    this.onvniSound.volume = 0.1;
   }
 
   // SE AÑADEN VIDAS AL INICIAR EL JUEGO
@@ -77,14 +79,20 @@ class Game {
       counterNode.innerHTML = 0;
       musicCarrera.pause();
       musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
+      musicLose.currentTime = 0;
+      musicLose.play()
     } else if (this.stageOne === false) {
       this.isGameOn = false;
       gameOverHardcorNode.style.display = "flex";
+      let randomImage =1 + Math.floor(Math.random() * 19)
+      imagenRandomNode.innerHTML = `<img src="./images/game-over/${randomImage}.jpg" width="800" alt="game-over-meme" />`
       gameScreenNode.style.display = "none";
       gameBoxNode.innerHTML = "";
       counterNode.innerHTML = 0;
       musicCarrera.pause();
       musicLose.innerHTML = `<source src="./sound/lose-sound.mp3" type="audio/mpeg">`;
+      musicLose.currentTime = 0;
+      musicLose.play()
     }
   };
 
@@ -104,7 +112,7 @@ class Game {
   // ITEM QUE TE SUMA 1 VIDA (CORAZON)
   randomItemLvlUp = () => {
     if (this.stageOne === true) {
-      let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
+      let randomNumberFrame = 1000 + Math.floor(Math.random() * 500);
       if (this.frames % randomNumberFrame === 0) {
         let randomX =
           300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
@@ -130,7 +138,8 @@ class Game {
       ) {
         this.vida4 = document.createElement("img");
         this.vida4.src = "./images/vida4.png";
-        this.vida4.width = "35";
+        this.vida4.width = "40";
+        this.vida4.height = "80";
         vidaNode.append(this.vida4);
         this.vida++;
         cadaItem.itemNode.remove();
@@ -149,7 +158,7 @@ class Game {
   // ITEM QUE TE AUMENTA LA MOVILIDAD (SONIC)
   randomItemSpeed = () => {
     if (this.stageOne === true) {
-      let randomNumberFrame = Math.floor(Math.random() * (2000 - 1500) + 1500);
+      let randomNumberFrame = 1000 + Math.floor(Math.random() * 500);
       if (this.frames % randomNumberFrame === 0) {
         let randomX =
           300 + Math.floor(Math.random() * (gameBoxNode.offsetWidth / 2));
@@ -208,48 +217,48 @@ class Game {
       const speedStageThree = 10;
       //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN PRIMER STAGE
       if (this.counter < 14) {
-        if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
+        if (this.enemyArr.length === 0 || this.frames % 500 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 380);
           let rivalArriba = new Rivales(randomNumberY, 1, speedStageOne);
           this.enemyArr.push(rivalArriba);
-        } else if (this.frames % 500 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
+        } else if (this.frames % 300 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 380);
           let rivalAbajo = new Rivales(randomNumberY, 1, speedStageOne);
           this.enemyArr.push(rivalAbajo);
         } else if (this.frames % 800 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
+          let randomNumberY = Math.floor(Math.random() * 380);
           let rivalAbajo = new Rivales(randomNumberY, 6, speedStageOne);
           this.enemyArr.push(rivalAbajo);
         }
       }
       //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN SEGUNDO STAGE
       else if (this.counter >= 14 && this.counter < 24) {
-        if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
+        if (this.enemyArr.length === 0 || this.frames % 500 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 380);
           let rivalArriba = new Rivales(randomNumberY, 3, speedStageTwo);
           this.enemyArr.push(rivalArriba);
-        } else if (this.frames % 500 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
+        } else if (this.frames % 300 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 380);
           let rivalAbajo = new Rivales(randomNumberY, 3, speedStageTwo);
           this.enemyArr.push(rivalAbajo);
         } else if (this.frames % 800 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
+          let randomNumberY = Math.floor(Math.random() * 380);
           let rivalAbajo = new Rivales(randomNumberY, 2, speedStageTwo);
           this.enemyArr.push(rivalAbajo);
         }
       }
       //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN TERCER STAGE
       else if (this.counter >= 24) {
-        if (this.enemyArr.length === 0 || this.frames % 300 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
-          let rivalArriba = new Rivales(randomNumberY, 4, speedStageThree);
+        if (this.enemyArr.length === 0 || this.frames % 850 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 380);
+          let rivalArriba = new Rivales(randomNumberY, 2, speedStageThree);
           this.enemyArr.push(rivalArriba);
-        } else if (this.frames % 700 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
+        } else if (this.frames % 300 === 0) {
+          let randomNumberY = Math.floor(Math.random() * 380);
           let rivalAbajo = new Rivales(randomNumberY, 4, speedStageThree);
           this.enemyArr.push(rivalAbajo);
         } else if (this.frames % 500 === 0) {
-          let randomNumberY = Math.floor(Math.random() * 400);
+          let randomNumberY = Math.floor(Math.random() * 380);
           let rivalAbajo = new Rivales(randomNumberY, 5, speedStageThree);
           this.enemyArr.push(rivalAbajo);
         }
@@ -258,18 +267,27 @@ class Game {
       const speedStageHardcore = 10;
       //  CONDICIONAL PARA LA APARICION DE LOS RIVALES EN HARDCORE
 
-      if (this.enemyArr.length === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
+      if (this.enemyArr.length === 0 || this.frames % 700 === 0 ) {
+        let randomNumberY = Math.floor(Math.random() * 380);
         let rivalArriba = new Rivales(randomNumberY, 1, speedStageHardcore);
         this.enemyArr.push(rivalArriba);
       } else if (this.frames % 300 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
+        let randomNumberY = Math.floor(Math.random() * 380);
         let rivalAbajo = new Rivales(randomNumberY, 3, speedStageHardcore);
         this.enemyArr.push(rivalAbajo);
       } else if (this.frames % 500 === 0) {
-        let randomNumberY = Math.floor(Math.random() * 400);
+        let randomNumberY = Math.floor(Math.random() * 380);
         let rivalAbajo = new Rivales(randomNumberY, 4, speedStageHardcore);
         this.enemyArr.push(rivalAbajo);
+      } else if (this.frames % 1300 === 0) {
+        let randomNumberY = Math.floor(Math.random() * 380);
+        let rivalAbajo = new Rivales(randomNumberY, 7, speedStageHardcore);
+        this.enemyArr.push(rivalAbajo);
+      } else if (this.frames % 2200 === 0) {
+        let randomNumberY = Math.floor(Math.random() * 350);
+        let rivalAbajo = new Rivales(randomNumberY, 8, speedStageHardcore);
+        this.enemyArr.push(rivalAbajo);
+        this.onvniSound.play()
       }
     }
   };
