@@ -65,6 +65,8 @@ class Game {
         vidaNode.innerHTML = "";
         musicCarrera.pause();
         musicWin.innerHTML = `<source src="./sound/win-sound.mp3" type="audio/mpeg">`;
+        musicWin.currentTime = 0;
+        musicWin.play()
         counterNode.innerHTML = 0;
       }
     }
@@ -84,7 +86,7 @@ class Game {
     } else if (this.stageOne === false) {
       this.isGameOn = false;
       gameOverHardcorNode.style.display = "flex";
-      let randomImage =1 + Math.floor(Math.random() * 19)
+      let randomImage =1 + Math.floor(Math.random() * 18)
       imagenRandomNode.innerHTML = `<img src="./images/game-over/${randomImage}.jpg" width="800" alt="game-over-meme" />`
       gameScreenNode.style.display = "none";
       gameBoxNode.innerHTML = "";
