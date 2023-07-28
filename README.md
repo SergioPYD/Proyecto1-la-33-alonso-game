@@ -48,7 +48,6 @@ Juego de carreras en el que a mandos del coche de Fernando Alonso, intentaremos 
 - JavaScript
 - DOM Manipulation
 - JS Classes
-- Local Storage
 - JS Audio()
 - Adobe Photoshop
 
@@ -205,7 +204,7 @@ Juego de carreras en el que a mandos del coche de Fernando Alonso, intentaremos 
 [Link](https://www.canva.com/design/DAFpQJVoXfA/D-OsxwojUzSBMONwJcQ7zw/view?utm_content=DAFpQJVoXfA&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 
 ### Trello
-[Link](www.https://trello.com/invite/b/Nks6SdRv/ATTI8ac37402b537e718986a030e517938d5A9C61F8C/la-33-trello-url-here.com)
+[Link](https://www.trello.com/invite/b/Nks6SdRv/ATTI8ac37402b537e718986a030e517938d5A9C61F8C/la-33-trello-url-here.com)
 
 ### Slides
 [Link](https://www.canva.com/design/DAFp6jer3JU/V8tv0gV2reg7zubLca_lPw/watch?utm_content=DAFp6jer3JU&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
