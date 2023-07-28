@@ -208,7 +208,7 @@ Juego de carreras en el que a mandos del coche de Fernando Alonso, intentaremos 
 [Link](www.https://trello.com/invite/b/Nks6SdRv/ATTI8ac37402b537e718986a030e517938d5A9C61F8C/la-33-trello-url-here.com)
 
 ### Slides
-[Link](www.your-slides-url-here.com)
+[Link](https://www.canva.com/design/DAFp6jer3JU/V8tv0gV2reg7zubLca_lPw/watch?utm_content=DAFp6jer3JU&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 
 ## Deploy
-[Link](www.your-deploy-url-here.com)
+[Link](https://sergiopyd.github.io/Proyecto1-la-33-alonso-game/)
