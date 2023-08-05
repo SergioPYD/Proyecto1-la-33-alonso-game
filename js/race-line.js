@@ -37,7 +37,7 @@ class RaceLine {
   }
 
   automaticMovement = () => {
-    this.x -= 6;
+    this.x -= 12;
     this.positionUpdate();
   };
 

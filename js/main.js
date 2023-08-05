@@ -50,6 +50,68 @@ function startGame() {
 
   gameObj.vidasLayout();
   gameObj.gameLoop();
+
+  const character = {
+    x: gameObj.alonso.x,
+    y: gameObj.alonso.y,
+    velocityX: 0,
+    velocityY: 0,
+    acceleration: 0.85,
+    maxVelocity: 5,
+  };
+  
+  const keys = {};
+  
+  window.addEventListener("keydown", (event) => {
+    keys[event.key] = true;
+  });
+  
+  window.addEventListener("keyup", (event) => {
+    keys[event.key] = false;
+  });
+  
+  function update() {
+    const speed = 50;
+    const diagonalSpeed = 75;
+  
+    // Adjust acceleration and maxVelocity if gameObj.moreSpeed is true
+    if (gameObj.moreSpeed === true) {
+      character.acceleration = 1.1; // Double the acceleration
+      character.maxVelocity = 7; // Double the maxVelocity
+    } else {
+      character.acceleration = 0.75; // Reset acceleration
+      character.maxVelocity = 5; // Reset maxVelocity
+    }
+  
+    if (keys["ArrowRight"] && character.x <= 800) {
+      character.velocityX += character.acceleration;
+    } else if (keys["ArrowLeft"] && character.x >= 0) {
+      character.velocityX -= character.acceleration;
+    }
+  
+    if (keys["ArrowDown"] && character.y <= 330) {
+      character.velocityY += character.acceleration;
+    } else if (keys["ArrowUp"] && character.y >= 30) {
+      character.velocityY -= character.acceleration;
+    }
+  
+    character.velocityX = Math.min(character.velocityX, character.maxVelocity);
+    character.velocityY = Math.min(character.velocityY, character.maxVelocity);
+  
+    character.x += character.velocityX;
+    character.y += character.velocityY;
+  
+    character.velocityX *= 0.9;
+    character.velocityY *= 0.9;
+  
+    // Update character's position in your game world
+    gameObj.alonso.x = character.x;
+    gameObj.alonso.y = character.y;
+  
+    requestAnimationFrame(update);
+  }
+  
+  requestAnimationFrame(update);
 }
 
 function instructions() {
@@ -133,102 +195,102 @@ tryAgainHardcoreBtnNode.addEventListener("click", gameOverHardcoretoTryAgain);
 hardcoreNode.addEventListener("click",winToHardcore )
 gameOvertoInicioHardcoreBtnNode.addEventListener("click",gameOverHarcoreToInicio)
 // MOVIMIENTOS DEL COCHE PRINCIPAL
-window.addEventListener("keydown", (event) => {
-  if (gameObj.isGameOn === true && gameObj.moreSpeed === false) {
-    const speed = 50;
-    const diagonalSpeed = 75;
+// window.addEventListener("keydown", (event) => {
+//   if (gameObj.isGameOn === true && gameObj.moreSpeed === false) {
+//     const speed = 50;
+//     const diagonalSpeed = 75;
 
-    if (event.key === "ArrowRight" && gameObj.alonso.x <= 800) {
-      gameObj.alonso.x += speed;
-    } else if (event.key === "ArrowLeft" && gameObj.alonso.x >= 0) {
-      gameObj.alonso.x -= speed;
-    } else if (event.key === "ArrowDown" && gameObj.alonso.y <= 330) {
-      gameObj.alonso.y += speed;
-    } else if (event.key === "ArrowUp" && gameObj.alonso.y >= 30) {
-      gameObj.alonso.y -= speed;
-    }
+//     if (event.key === "ArrowRight" && gameObj.alonso.x <= 800) {
+//       gameObj.alonso.x += speed;
+//     } else if (event.key === "ArrowLeft" && gameObj.alonso.x >= 0) {
+//       gameObj.alonso.x -= speed;
+//     } else if (event.key === "ArrowDown" && gameObj.alonso.y <= 330) {
+//       gameObj.alonso.y += speed;
+//     } else if (event.key === "ArrowUp" && gameObj.alonso.y >= 30) {
+//       gameObj.alonso.y -= speed;
+//     }
 
-    // MOVIMIENTO DIAGONAL
-    if (
-      event.key === "ArrowUp" &&
-      event.key === "ArrowRight" &&
-      gameObj.alonso.y >= 30 &&
-      gameObj.alonso.x <= 800
-    ) {
-      gameObj.alonso.y -= diagonalSpeed;
-      gameObj.alonso.x += diagonalSpeed;
-    } else if (
-      event.key === "ArrowUp" &&
-      event.key === "ArrowLeft" &&
-      gameObj.alonso.y >= 30 &&
-      gameObj.alonso.x >= 0
-    ) {
-      gameObj.alonso.y -= diagonalSpeed;
-      gameObj.alonso.x -= diagonalSpeed;
-    } else if (
-      event.key === "ArrowDown" &&
-      event.key === "ArrowRight" &&
-      gameObj.alonso.y <= 300 &&
-      gameObj.alonso.x <= 800
-    ) {
-      gameObj.alonso.y += diagonalSpeed;
-      gameObj.alonso.x += diagonalSpeed;
-    } else if (
-      event.key === "ArrowDown" &&
-      event.key === "ArrowLeft" &&
-      gameObj.alonso.y <= 300 &&
-      gameObj.alonso.x >= 0
-    ) {
-      gameObj.alonso.y += diagonalSpeed;
-      gameObj.alonso.x -= diagonalSpeed;
-    }
-  } else if (gameObj.isGameOn === true && gameObj.moreSpeed === true) {
-    const upSpeed = 80;
-    const diagonalSpeed = 120;
+//     // MOVIMIENTO DIAGONAL
+//     if (
+//       event.key === "ArrowUp" &&
+//       event.key === "ArrowRight" &&
+//       gameObj.alonso.y >= 30 &&
+//       gameObj.alonso.x <= 800
+//     ) {
+//       gameObj.alonso.y -= diagonalSpeed;
+//       gameObj.alonso.x += diagonalSpeed;
+//     } else if (
+//       event.key === "ArrowUp" &&
+//       event.key === "ArrowLeft" &&
+//       gameObj.alonso.y >= 30 &&
+//       gameObj.alonso.x >= 0
+//     ) {
+//       gameObj.alonso.y -= diagonalSpeed;
+//       gameObj.alonso.x -= diagonalSpeed;
+//     } else if (
+//       event.key === "ArrowDown" &&
+//       event.key === "ArrowRight" &&
+//       gameObj.alonso.y <= 300 &&
+//       gameObj.alonso.x <= 800
+//     ) {
+//       gameObj.alonso.y += diagonalSpeed;
+//       gameObj.alonso.x += diagonalSpeed;
+//     } else if (
+//       event.key === "ArrowDown" &&
+//       event.key === "ArrowLeft" &&
+//       gameObj.alonso.y <= 300 &&
+//       gameObj.alonso.x >= 0
+//     ) {
+//       gameObj.alonso.y += diagonalSpeed;
+//       gameObj.alonso.x -= diagonalSpeed;
+//     }
+//   } else if (gameObj.isGameOn === true && gameObj.moreSpeed === true) {
+//     const upSpeed = 80;
+//     const diagonalSpeed = 120;
 
-    if (event.key === "ArrowRight" && gameObj.alonso.x <= 800) {
-      gameObj.alonso.x += upSpeed;
-    } else if (event.key === "ArrowLeft" && gameObj.alonso.x >= 0) {
-      gameObj.alonso.x -= upSpeed;
-    } else if (event.key === "ArrowDown" && gameObj.alonso.y <= 300) {
-      gameObj.alonso.y += upSpeed;
-    } else if (event.key === "ArrowUp" && gameObj.alonso.y >= 60) {
-      gameObj.alonso.y -= upSpeed;
-    }
+//     if (event.key === "ArrowRight" && gameObj.alonso.x <= 800) {
+//       gameObj.alonso.x += upSpeed;
+//     } else if (event.key === "ArrowLeft" && gameObj.alonso.x >= 0) {
+//       gameObj.alonso.x -= upSpeed;
+//     } else if (event.key === "ArrowDown" && gameObj.alonso.y <= 300) {
+//       gameObj.alonso.y += upSpeed;
+//     } else if (event.key === "ArrowUp" && gameObj.alonso.y >= 60) {
+//       gameObj.alonso.y -= upSpeed;
+//     }
 
-    // MOVIMIENTO DIAGONAL
-    if (
-      event.key === "ArrowUp" &&
-      event.key === "ArrowRight" &&
-      gameObj.alonso.y >= 30 &&
-      gameObj.alonso.x <= 800
-    ) {
-      gameObj.alonso.y -= diagonalSpeed;
-      gameObj.alonso.x += diagonalSpeed;
-    } else if (
-      event.key === "ArrowUp" &&
-      event.key === "ArrowLeft" &&
-      gameObj.alonso.y >= 30 &&
-      gameObj.alonso.x >= 0
-    ) {
-      gameObj.alonso.y -= diagonalSpeed;
-      gameObj.alonso.x -= diagonalSpeed;
-    } else if (
-      event.key === "ArrowDown" &&
-      event.key === "ArrowRight" &&
-      gameObj.alonso.y <= 300 &&
-      gameObj.alonso.x <= 800
-    ) {
-      gameObj.alonso.y += diagonalSpeed;
-      gameObj.alonso.x += diagonalSpeed;
-    } else if (
-      event.key === "ArrowDown" &&
-      event.key === "ArrowLeft" &&
-      gameObj.alonso.y <= 300 &&
-      gameObj.alonso.x >= 0
-    ) {
-      gameObj.alonso.y += diagonalSpeed;
-      gameObj.alonso.x -= diagonalSpeed;
-    }
-  }
-});
+//     // MOVIMIENTO DIAGONAL
+//     if (
+//       event.key === "ArrowUp" &&
+//       event.key === "ArrowRight" &&
+//       gameObj.alonso.y >= 30 &&
+//       gameObj.alonso.x <= 800
+//     ) {
+//       gameObj.alonso.y -= diagonalSpeed;
+//       gameObj.alonso.x += diagonalSpeed;
+//     } else if (
+//       event.key === "ArrowUp" &&
+//       event.key === "ArrowLeft" &&
+//       gameObj.alonso.y >= 30 &&
+//       gameObj.alonso.x >= 0
+//     ) {
+//       gameObj.alonso.y -= diagonalSpeed;
+//       gameObj.alonso.x -= diagonalSpeed;
+//     } else if (
+//       event.key === "ArrowDown" &&
+//       event.key === "ArrowRight" &&
+//       gameObj.alonso.y <= 300 &&
+//       gameObj.alonso.x <= 800
+//     ) {
+//       gameObj.alonso.y += diagonalSpeed;
+//       gameObj.alonso.x += diagonalSpeed;
+//     } else if (
+//       event.key === "ArrowDown" &&
+//       event.key === "ArrowLeft" &&
+//       gameObj.alonso.y <= 300 &&
+//       gameObj.alonso.x >= 0
+//     ) {
+//       gameObj.alonso.y += diagonalSpeed;
+//       gameObj.alonso.x -= diagonalSpeed;
+//     }
+//   }
+// });
