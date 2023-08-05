@@ -107,6 +107,50 @@ function startGame() {
     // Update character's position in your game world
     gameObj.alonso.x = character.x;
     gameObj.alonso.y = character.y;
+
+    // Listen for double tap on the game element to toggle full screen
+    const gameElement = document.getElementById("game"); // Replace with your game element's ID
+    
+    gameScreenNode.addEventListener("dblclick", () => {
+      const now = Date.now();
+      const timeSinceLastTap = now - lastTap;
+    
+      if (timeSinceLastTap < 300) {
+        toggleFullScreen();
+      }
+    
+      lastTap = now;
+    });
+    
+    // Toggle full screen mode
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        gameScreenNode.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+    
+    // Listen for touchstart event for mobile movement
+    gameScreenNode.addEventListener("touchstart", (event) => {
+      touchStartX = event.touches[0].clientX;
+      touchStartY = event.touches[0].clientY;
+    });
+    
+    gameScreenNode.addEventListener("touchmove", (event) => {
+      event.preventDefault();
+      const touchX = event.touches[0].clientX;
+      const touchY = event.touches[0].clientY;
+    
+      const deltaX = touchX - touchStartX;
+      const deltaY = touchY - touchStartY;
+    
+      character.velocityX = deltaX * 0.1;
+      character.velocityY = deltaY * 0.1;
+    });
+    
   
     requestAnimationFrame(update);
   }
